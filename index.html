@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beatifull Source</title>
+<link rel="icon" type="image/png" href="bs.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#070709;
+--bg2:#0d0d12;
+--bg3:#12121a;
+--surface:#16161f;
+--surface2:#1c1c28;
+--border:#2a2a3d;
+--border2:#3a3a55;
+--purple:#7c3aed;
+--purple2:#9d5ff0;
+--purple3:#b480f7;
+--purple-glow:rgba(124,58,237,0.18);
+--violet:#5b21b6;
+--grey:#8888a0;
+--grey2:#aaaabc;
+--white:#e8e8f0;
+--text:#d0d0e0;
+--accent:#a78bfa;
+--accent2:#c4b5fd;
+--green:#10b981;
+--red:#ef4444;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(124,58,237,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(91,33,182,0.06) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,7,9,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 24px;gap:16px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--white);letter-spacing:-.02em;white-space:nowrap;flex-shrink:0}
+.logo span{color:var(--purple3)}
+.nav-links{display:flex;align-items:center;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-btn{background:none;border:1px solid transparent;color:var(--grey);padding:6px 13px;border-radius:6px;cursor:pointer;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.04em;white-space:nowrap;transition:all .2s;text-transform:uppercase}
+.nav-btn:hover,.nav-btn.active{color:var(--accent2);border-color:var(--border2);background:var(--surface)}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto}
+.lang-btns{display:flex;gap:4px}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--grey);padding:4px 9px;border-radius:5px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--purple2);color:var(--purple3)}
+.swiss-knife{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--border2);letter-spacing:.08em;padding:4px 8px;border:1px solid var(--border);border-radius:4px;white-space:nowrap}
+.gh-btn{background:var(--surface);border:1px solid var(--border2);color:var(--grey2);padding:5px 11px;border-radius:6px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:5px;transition:all .2s}
+.gh-btn:hover{border-color:var(--purple2);color:var(--white);background:var(--surface2)}
+.hamburger{display:none;background:none;border:1px solid var(--border);color:var(--grey2);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:1rem}
+
+.mobile-menu{display:none;position:fixed;top:60px;right:0;bottom:0;width:260px;background:rgba(13,13,18,0.98);backdrop-filter:blur(20px);border-left:1px solid var(--border);z-index:99;padding:20px 16px;transform:translateX(100%);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu .nav-btn{display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:4px;border-radius:7px}
+
+main{padding-top:60px;min-height:100vh;position:relative;z-index:1}
+.page{display:none;animation:fadeUp .4s ease forwards}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.hero{padding:80px 24px 60px;max-width:860px;margin:0 auto;text-align:center}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;color:var(--purple3);text-transform:uppercase;margin-bottom:20px;opacity:.85}
+.hero-title{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--white);margin-bottom:22px}
+.hero-title em{font-style:normal;color:var(--purple3);position:relative}
+.hero-title em::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),transparent);border-radius:2px}
+.hero-sub{font-size:1rem;line-height:1.7;color:var(--grey2);max-width:600px;margin:0 auto 36px;font-family:'JetBrains Mono',monospace;font-weight:300}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px}
+.hero-tag{background:var(--surface);border:1px solid var(--border);color:var(--grey2);padding:5px 14px;border-radius:20px;font-size:.75rem;font-family:'JetBrains Mono',monospace}
+.hero-tag.bad{border-color:rgba(239,68,68,.3);color:#f87171;background:rgba(239,68,68,.05)}
+.hero-tag.good{border-color:rgba(167,139,250,.3);color:var(--accent2);background:rgba(124,58,237,.06)}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--purple),var(--violet));color:var(--white);padding:13px 28px;border-radius:9px;text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.03em;border:none;cursor:pointer;transition:all .25s;box-shadow:0 0 30px rgba(124,58,237,.25)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 6px 40px rgba(124,58,237,.4)}
+
+.threat-section{max-width:860px;margin:0 auto 60px;padding:0 24px}
+.threat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.threat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;position:relative;overflow:hidden}
+.threat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.threat-card.danger::before{background:linear-gradient(90deg,var(--red),transparent)}
+.threat-card.good::before{background:linear-gradient(90deg,var(--purple),transparent)}
+.threat-card h3{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.threat-card.danger h3{color:#f87171}
+.threat-card.good h3{color:var(--accent2)}
+.threat-card p{font-size:.82rem;line-height:1.6;color:var(--grey2);font-family:'JetBrains Mono',monospace;font-weight:300}
+
+.leave-banner{max-width:860px;margin:0 auto 60px;padding:0 24px}
+.leave-card{background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(91,33,182,.08));border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:32px;text-align:center;position:relative;overflow:hidden}
+.leave-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(124,58,237,.06) 0%,transparent 60%);animation:rotateBg 8s linear infinite}
+@keyframes rotateBg{to{transform:rotate(360deg)}}
+.leave-card h2{font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:10px;position:relative}
+.leave-card p{font-size:.85rem;color:var(--grey2);margin-bottom:20px;font-family:'JetBrains Mono',monospace;position:relative}
+.leave-link{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--purple),var(--violet));color:var(--white);padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.85rem;position:relative;transition:all .25s}
+.leave-link:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(124,58,237,.4)}
+
+.category-page{padding:40px 24px 80px;max-width:1100px;margin:0 auto}
+.cat-header{margin-bottom:36px}
+.cat-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:var(--white);letter-spacing:-.03em;margin-bottom:8px}
+.cat-subtitle{font-size:.85rem;color:var(--grey);font-family:'JetBrains Mono',monospace;line-height:1.6;max-width:640px}
+.store-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;margin-bottom:10px}
+.store-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border2);color:var(--accent);padding:6px 14px;border-radius:20px;text-decoration:none;font-size:.72rem;font-family:'JetBrains Mono',monospace;font-weight:500;transition:all .2s;white-space:nowrap}
+.store-chip:hover{border-color:var(--purple2);background:rgba(124,58,237,.1);color:var(--white)}
+.store-label{font-size:.65rem;color:var(--grey);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em}
+
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.app-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:all .3s cubic-bezier(.16,1,.3,1);animation:cardIn .4s ease forwards;opacity:0;transform:translateY(16px)}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.app-card:hover{border-color:var(--border2);background:var(--surface2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.app-top{display:flex;align-items:center;gap:12px}
+.app-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--surface2),var(--bg3));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden}
+.app-icon img{width:100%;height:100%;object-fit:cover;border-radius:9px}
+.app-name{font-weight:700;font-size:.95rem;color:var(--white);line-height:1.3}
+.app-repo{font-size:.65rem;color:var(--grey);font-family:'JetBrains Mono',monospace}
+.app-desc{font-size:.8rem;line-height:1.6;color:var(--grey2);font-family:'JetBrains Mono',monospace;font-weight:300}
+.app-features{display:flex;flex-direction:column;gap:4px}
+.app-feat{font-size:.72rem;color:var(--accent);font-family:'JetBrains Mono',monospace;display:flex;align-items:flex-start;gap:6px}
+.app-feat::before{content:'▸';color:var(--purple2);flex-shrink:0;margin-top:1px}
+.app-dl{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);color:var(--accent2);padding:7px 14px;border-radius:7px;text-decoration:none;font-size:.73rem;font-family:'JetBrains Mono',monospace;font-weight:500;transition:all .2s;margin-top:auto;width:fit-content}
+.app-dl:hover{background:rgba(124,58,237,.22);border-color:var(--purple2);color:var(--white)}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 24px;text-align:center;position:relative;z-index:1}
+.footer-inner{max-width:700px;margin:0 auto}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--white);margin-bottom:6px}
+.footer-logo span{color:var(--purple3)}
+.footer-slogan{font-size:.78rem;color:var(--grey);font-family:'JetBrains Mono',monospace;margin-bottom:20px}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px}
+.footer-link{color:var(--grey2);text-decoration:none;font-size:.75rem;font-family:'JetBrains Mono',monospace;transition:color .2s}
+.footer-link:hover{color:var(--accent2)}
+.footer-copy{font-size:.68rem;color:var(--grey);font-family:'JetBrains Mono',monospace;opacity:.6}
+
+.overlay{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:98}
+.overlay.open{display:block}
+
+@media(max-width:768px){
+.nav-links{display:none}
+.swiss-knife{display:none}
+.hamburger{display:block}
+.lang-btns{gap:3px}
+.lang-btn{padding:3px 7px;font-size:.65rem}
+.apps-grid{grid-template-columns:1fr}
+.hero-title{font-size:1.9rem}
+.threat-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+header{padding:0 12px;gap:10px}
+.logo{font-size:1rem}
+}
+
+.stagger-1{animation-delay:.05s}
+.stagger-2{animation-delay:.1s}
+.stagger-3{animation-delay:.15s}
+.stagger-4{animation-delay:.2s}
+.stagger-5{animation-delay:.25s}
+.stagger-6{animation-delay:.3s}
+.stagger-7{animation-delay:.35s}
+.stagger-8{animation-delay:.4s}
+.stagger-9{animation-delay:.45s}
+.stagger-10{animation-delay:.5s}
+.stagger-11{animation-delay:.55s}
+.stagger-12{animation-delay:.6s}
+.stagger-13{animation-delay:.65s}
+.stagger-14{animation-delay:.7s}
+.stagger-15{animation-delay:.75s}
+.stagger-16{animation-delay:.8s}
+.stagger-17{animation-delay:.85s}
+.stagger-18{animation-delay:.9s}
+.stagger-19{animation-delay:.95s}
+.stagger-20{animation-delay:1s}
+.stagger-21{animation-delay:1.05s}
+.stagger-22{animation-delay:1.1s}
+.stagger-23{animation-delay:1.15s}
+.stagger-24{animation-delay:1.2s}
+.stagger-25{animation-delay:1.25s}
+.stagger-26{animation-delay:1.3s}
+.stagger-27{animation-delay:1.35s}
+.stagger-28{animation-delay:1.4s}
+.stagger-29{animation-delay:1.45s}
+.stagger-30{animation-delay:1.5s}
+.stagger-31{animation-delay:1.55s}
+.stagger-32{animation-delay:1.6s}
+.stagger-33{animation-delay:1.65s}
+.stagger-34{animation-delay:1.7s}
+.stagger-35{animation-delay:1.75s}
+.stagger-36{animation-delay:1.8s}
+.stagger-37{animation-delay:1.85s}
+.stagger-38{animation-delay:1.9s}
+.stagger-39{animation-delay:1.95s}
+.stagger-40{animation-delay:2s}
+.stagger-41{animation-delay:2.05s}
+.stagger-42{animation-delay:2.1s}
+.stagger-43{animation-delay:2.15s}
+.stagger-44{animation-delay:2.2s}
+.stagger-45{animation-delay:2.25s}
+.stagger-46{animation-delay:2.3s}
+.stagger-47{animation-delay:2.35s}
+.stagger-48{animation-delay:2.4s}
+.stagger-49{animation-delay:2.45s}
+.stagger-50{animation-delay:2.5s}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>Beatifull</span> Source</div>
+  <nav class="nav-links" id="navLinks"></nav>
+  <div class="header-right">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <div class="swiss-knife">⚔ Swiss Knife</div>
+    <a class="gh-btn" href="https://github.com/tc4dy" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      tc4dy
+    </a>
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu"></nav>
+
+<main id="main"></main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span>Beatifull</span> Source</div>
+    <div class="footer-slogan" id="footerSlogan"></div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://leavemyinternet.github.io" target="_blank" rel="noopener">leavemyinternet.github.io</a>
+      <a class="footer-link" href="https://github.com/tc4dy" target="_blank" rel="noopener">github.com/tc4dy</a>
+      <a class="footer-link" href="https://f-droid.org" target="_blank" rel="noopener">F-Droid</a>
+      <a class="footer-link" href="https://obtainium.imranr.dev" target="_blank" rel="noopener">Obtainium</a>
+    </div>
+    <div class="footer-copy">© 2026 Beatifull Source · MIT License · Open Source · No Tracking · No Ads</div>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en: {
+    home: "Home",
+    privacy: "Privacy & Security",
+    video: "Video & Media",
+    communication: "Communication",
+    tools: "Tools",
+    phone: "Phone & System",
+    maps: "Maps & Travel",
+    footerSlogan: "The internet belongs to everyone. Keep it that way.",
+    heroEyebrow: "Open Source · Privacy First · Your Data, Your Rules",
+    heroTitle: ["Your phone knows more about you", " than your closest friend."],
+    heroTitleEm: "Let's fix that.",
+    heroSub: "Every closed-source app you use is a silent observer. Beatifull Source is your map to the open web — real apps, real privacy, real freedom.",
+    heroTags: ["📡 GPS tracked 24/7","📸 Camera access","🎙 Mic always listening","🔑 Password harvesting","💰 Sold to advertisers","✦ Open Source = No spying","✦ You control your data","✦ Free forever"],
+    heroCta: "Explore Open Source Apps →",
+    threatTitle: "What closed-source apps are really doing",
+    threatCards: [
+      {type:"danger",title:"Data Harvesting",text:"Your location, contacts, browsing history, microphone snippets — packaged, sold, and profiled. Not hypothetically. Daily."},
+      {type:"danger",title:"Permanent Surveillance",text:"Google, Meta, and their partners track you across every app and website. Your digital life is their product."},
+      {type:"danger",title:"No Transparency",text:"You can't audit the code. You don't know what runs on your device. You agreed to it on page 47 of the ToS."},
+      {type:"good",title:"Open Source Changes Everything",text:"The code is public. Audited by thousands. No hidden trackers. No secret handshakes. What you see is what runs."},
+      {type:"good",title:"Lightweight & Efficient",text:"Open source apps skip the bloat. No background analytics engines, no ad SDKs, no telemetry daemons. They use less RAM, less battery, and less storage than their closed counterparts."},
+      {type:"good",title:"Easier, Faster, Cleaner",text:"No mandatory account creation, no paywalled features, no dark patterns. Install, open, use. Open source apps do exactly what they say on the tin — and nothing more."}
+    ],
+    leaveTitle: "Want to go deeper?",
+    leaveSub: "The Free Internet project explains why your digital rights matter — and what you can do to protect them.",
+    leaveLink: "Visit leavemyinternet.github.io →",
+    storeLabel: "Find these apps on:",
+    dlBtn: "Get App →",
+    catDescs: {
+      privacy: "Lock down your digital life. These apps give you cryptographic control over your passwords, identity, and communications — no cloud middleman required.",
+      video: "Watch, listen, download. All without being the product. These apps give you the content without the surveillance.",
+      communication: "Talk, message, email — on your terms. End-to-end encrypted, open protocol, federated. No corporation owns your conversations.",
+      tools: "The everyday utilities that respect you. File managers, keyboards, notes, browsers — rebuilt from scratch with privacy by default.",
+      phone: "Your phone's default apps are surveillance tools. Replace every single one. Fossify gives you the full suite — camera, dialer, contacts — 100% open.",
+      maps: "Navigate, explore, and plan without handing your every move to Google. Open maps, open transit data, open weather."
+    },
+    adbNote: "⚡ Pro tip: Stock apps from your manufacturer can't be uninstalled normally. Use ADB (Android Debug Bridge) to remove them completely. Check leavemyinternet.github.io for a step-by-step guide."
+  },
+  tr: {
+    home: "Ana Sayfa",
+    privacy: "Gizlilik & Güvenlik",
+    video: "Video & Medya",
+    communication: "İletişim & Sosyal",
+    tools: "Araçlar & Yardımcılar",
+    phone: "Telefon & Sistem",
+    maps: "Harita & Seyahat",
+    footerSlogan: "İnternet herkese aittir. Öyle kalsın.",
+    heroEyebrow: "Açık Kaynak · Önce Gizlilik · Verilerin, Kuralların",
+    heroTitle: ["Telefonunuz sizin hakkınızda en yakın arkadaşınızdan daha çok şey biliyor."],
+    heroTitleEm: "Bunu düzeltelim.",
+    heroSub: "Kullandığın her kapalı kaynak uygulama sessiz bir gözetmen. Beatifull Source, açık webin haritası — gerçek uygulamalar, gerçek gizlilik, gerçek özgürlük.",
+    heroTags: ["📡 7/24 GPS takibi","📸 Kamera erişimi","🎙 Sürekli dinleme","🔑 Şifre toplama","💰 Reklam şirketlerine satıldı","✦ Açık Kaynak = Gözetim yok","✦ Veriler senin kontrolünde","✦ Sonsuza dek ücretsiz"],
+    heroCta: "Açık Kaynak Uygulamaları Keşfet →",
+    threatTitle: "Kapalı kaynak uygulamalar aslında ne yapıyor",
+    threatCards: [
+      {type:"danger",title:"Veri Toplama",text:"Konumun, kişi listen, tarama geçmişin, mikrofon kayıtların — paketlenip satılıyor ve profilleniyor. Sadece teoride değil. Her gün."},
+      {type:"danger",title:"Sürekli Gözetim",text:"Google, Meta ve ortakları seni her uygulama ve web sitesinde izliyor. Dijital hayatın onların ürünü."},
+      {type:"danger",title:"Şeffaflık Yok",text:"Kodu denetleyemezsin. Cihazında ne çalıştığını bilmiyorsun. Sözleşmenin 47. sayfasında bunu kabul ettin."},
+      {type:"good",title:"Açık Kaynak Her Şeyi Değiştiriyor",text:"Kod herkese açık. Binlerce kişi tarafından denetleniyor. Gizli izleyici yok. Gördüğün şey çalışan şeydir."},
+      {type:"good",title:"Hafif & Verimli",text:"Açık kaynak uygulamalar gereksiz her şeyi atar. Arka planda analiz motoru yok, reklam SDK'sı yok, telemetri daemon'u yok. Kapalı muadillerine kıyasla daha az RAM, daha az pil, daha az depolama tüketir."},
+      {type:"good",title:"Daha Kolay, Daha Hızlı, Daha Temiz",text:"Zorunlu hesap oluşturma yok, ücretli duvarların arkasına kilitlenmiş özellik yok, karanlık kalıp yok. Kur, aç, kullan. Açık kaynak uygulamalar tam olarak söylediklerini yapar — ve fazlasını değil."}
+    ],
+    leaveTitle: "Daha derine inmek ister misin?",
+    leaveSub: "Özgür İnternet projesi, dijital haklarının neden önemli olduğunu ve bunları nasıl koruyabileceğini anlatıyor.",
+    leaveLink: "leavemyinternet.github.io'yu Ziyaret Et →",
+    storeLabel: "Bu uygulamaları şurada bulabilirsin:",
+    dlBtn: "Uygulamayı Al →",
+    catDescs: {
+      privacy: "Dijital hayatını kilitle. Bu uygulamalar şifrelerini, kimliğini ve iletişimlerini şifreli olarak kontrol etmeni sağlar — bulut aracısı olmadan.",
+      video: "İzle, dinle, indir. Ürün olmadan. Bu uygulamalar gözetim olmadan içerik sunar.",
+      communication: "Konuş, mesaj at, e-posta gönder — kendi kurallarınla. Uçtan uca şifreli, açık protokol, federasyonlu. Hiçbir şirket konuşmalarına sahip değil.",
+      tools: "Sana saygı duyan günlük araçlar. Dosya yöneticileri, klavyeler, notlar, tarayıcılar — sıfırdan gizlilik öncelikli yeniden inşa edildi.",
+      phone: "Telefonunun varsayılan uygulamaları gözetim araçlarıdır. Hepsini değiştir. Fossify sana tam paketi sunar — kamera, tuş takımı, rehber — %100 açık kaynak.",
+      maps: "Her hareketini Google'a vermeden gezin, keşfedin ve planlayın. Açık haritalar, açık toplu taşıma verileri, açık hava durumu."
+    },
+    adbNote: "⚡ Profesyonel ipucu: Üreticinin hazır uygulamaları normal şekilde kaldırılamaz. Bunları tamamen kaldırmak için ADB (Android Debug Bridge) kullan. Adım adım kılavuz için leavemyinternet.github.io'yu ziyaret et."
+  },
+  ru: {
+    home: "Главная",
+    privacy: "Конфиденциальность",
+    video: "Видео и Медиа",
+    communication: "Общение",
+    tools: "Инструменты",
+    phone: "Телефон и Система",
+    maps: "Карты и Путешествия",
+    footerSlogan: "Интернет принадлежит всем. Пусть так и останется.",
+    heroEyebrow: "Открытый Код · Приватность · Ваши Данные, Ваши Правила",
+    heroTitle: ["Твой телефон знает о тебе больше,", " чем лучший друг."],
+    heroTitleEm: "Давай это исправим.",
+    heroSub: "Каждое закрытое приложение — молчаливый наблюдатель. Beatifull Source — твоя карта открытого веба: настоящие приложения, настоящая конфиденциальность, настоящая свобода.",
+    heroTags: ["📡 GPS 24/7","📸 Доступ к камере","🎙 Постоянное прослушивание","🔑 Сбор паролей","💰 Продано рекламодателям","✦ Открытый код = Без слежки","✦ Контролируй свои данные","✦ Бесплатно навсегда"],
+    heroCta: "Исследовать Open Source →",
+    threatTitle: "Что на самом деле делают закрытые приложения",
+    threatCards: [
+      {type:"danger",title:"Сбор данных",text:"Твоё местоположение, контакты, история браузера, фрагменты микрофона — упакованы, проданы и профилированы. Не теоретически. Ежедневно."},
+      {type:"danger",title:"Постоянная слежка",text:"Google, Meta и их партнёры отслеживают тебя в каждом приложении и на каждом сайте. Твоя цифровая жизнь — их продукт."},
+      {type:"danger",title:"Нет прозрачности",text:"Ты не можешь проверить код. Ты не знаешь, что работает на твоём устройстве. Ты согласился с этим на 47-й странице ToS."},
+      {type:"good",title:"Открытый код меняет всё",text:"Код публичен. Проверен тысячами людей. Никаких скрытых трекеров. Что видишь — то и работает."},
+      {type:"good",title:"Лёгкий и Эффективный",text:"Open source приложения не тащат балласт. Никаких фоновых аналитических движков, рекламных SDK и телеметрии. Они потребляют меньше RAM, меньше батареи и меньше памяти, чем закрытые аналоги."},
+      {type:"good",title:"Проще, Быстрее, Чище",text:"Никакой обязательной регистрации, никаких платных стен, никаких тёмных паттернов. Установил, открыл, использовал. Open source делает именно то, что написано — и ничего лишнего."}
+    ],
+    leaveTitle: "Хочешь углубиться?",
+    leaveSub: "Проект Free Internet объясняет, почему важны твои цифровые права — и что ты можешь сделать для их защиты.",
+    leaveLink: "Посетить leavemyinternet.github.io →",
+    storeLabel: "Найди эти приложения на:",
+    dlBtn: "Получить →",
+    catDescs: {
+      privacy: "Заблокируй свою цифровую жизнь. Эти приложения дают тебе криптографический контроль над паролями, личностью и коммуникациями — без посредников в облаке.",
+      video: "Смотри, слушай, скачивай. Без слежки. Эти приложения дают контент без наблюдения.",
+      communication: "Общайся, пиши, отправляй email — по своим правилам. Сквозное шифрование, открытый протокол, федерация. Ни одна корпорация не владеет твоими разговорами.",
+      tools: "Повседневные утилиты, которые уважают тебя. Файловые менеджеры, клавиатуры, заметки, браузеры — пересобраны с нуля с приватностью по умолчанию.",
+      phone: "Стандартные приложения твоего телефона — инструменты слежки. Замени каждое. Fossify даёт полный набор — камера, звонки, контакты — 100% открытый код.",
+      maps: "Навигируй, исследуй и планируй без передачи каждого шага Google. Открытые карты, открытые данные транспорта, открытая погода."
+    },
+    adbNote: "⚡ Совет профи: Стандартные приложения производителя нельзя удалить обычным способом. Используй ADB (Android Debug Bridge) для полного удаления. Пошаговое руководство на leavemyinternet.github.io."
+  }
+};
+
+const CATS = [
+  {id:"home"},
+  {id:"privacy"},
+  {id:"video"},
+  {id:"communication"},
+  {id:"tools"},
+  {id:"phone"},
+  {id:"maps"}
+];
+
+const STORES = {
+  en: [
+    {label:"F-Droid",url:"https://f-droid.org"},
+    {label:"IzzyOnDroid",url:"https://apt.izzysoft.de/fdroid/"},
+    {label:"Obtainium",url:"https://obtainium.imranr.dev"},
+    {label:"GitHub Releases",url:"https://github.com"}
+  ],
+  tr: [
+    {label:"F-Droid",url:"https://f-droid.org"},
+    {label:"IzzyOnDroid",url:"https://apt.izzysoft.de/fdroid/"},
+    {label:"Obtainium",url:"https://obtainium.imranr.dev"},
+    {label:"GitHub Sürümleri",url:"https://github.com"}
+  ],
+  ru: [
+    {label:"F-Droid",url:"https://f-droid.org"},
+    {label:"IzzyOnDroid",url:"https://apt.izzysoft.de/fdroid/"},
+    {label:"Obtainium",url:"https://obtainium.imranr.dev"},
+    {label:"GitHub Releases",url:"https://github.com"}
+  ]
+};
+
+const APPS = {
+  privacy: [
+    {name:"Bitwarden",icon:"🔐",repo:"bitwarden/clients",dl:"https://bitwarden.com/download/",desc:{en:"The gold standard of open-source password managers. Sync across all devices, share vaults with family, and sleep soundly knowing your passwords are truly yours.",tr:"Açık kaynak şifre yöneticilerinin altın standardı. Tüm cihazlarda senkronize et, aileniyle kasayı paylaş ve şifrelerinin gerçekten sende olduğunu bilerek rahat uyu.",ru:"Золотой стандарт менеджеров паролей с открытым кодом. Синхронизируй на всех устройствах, делись хранилищем с семьёй."},features:{en:["Zero-knowledge encryption","Cross-platform sync","Secure password generator","Self-hosting option"],tr:["Sıfır bilgi şifreleme","Çapraz platform senkronizasyonu","Güvenli şifre üreteci","Kendi sunucunda barındırma"],ru:["Шифрование с нулевым знанием","Синхронизация","Генератор паролей","Самохостинг"]}},
+    {name:"KeePassDX",icon:"🗝️",repo:"Kunzisoft/KeePassDX",dl:"https://www.keepassdx.com/",desc:{en:"Local-first password manager. Your vault never leaves your device unless you choose to sync it yourself. Total control, zero compromise.",tr:"Yerel öncelikli şifre yöneticisi. Kasanız siz senkronize etmeyi seçmediğiniz sürece asla cihazınızdan ayrılmaz.",ru:"Менеджер паролей с локальным хранением. Хранилище никогда не покидает устройство."},features:{en:["Offline vault","Biometric unlock","AES-256 encryption","Material design UI"],tr:["Çevrimdışı kasa","Biyometrik kilit açma","AES-256 şifreleme","Material tasarım"],ru:["Офлайн хранилище","Биометрика","AES-256","Material Design"]}},
+    {name:"Aegis Authenticator",icon:"🛡️",repo:"beemdevelopment/Aegis",dl:"https://getaegis.app/",desc:{en:"Your 2FA codes deserve better than Google Authenticator. Aegis stores them encrypted, backed up, and beautifully organized — without phoning home.",tr:"2FA kodlarınız Google Authenticator'dan daha iyisini hak ediyor. Aegis bunları şifreli, yedeklenmiş ve güzel organize edilmiş şekilde saklar.",ru:"Ваши 2FA-коды заслуживают лучшего. Aegis хранит их зашифрованными, с резервной копией."},features:{en:["Encrypted backups","Custom icons","Import from Google Auth","TOTP & HOTP support"],tr:["Şifreli yedekleme","Özel ikonlar","Google Auth'tan içe aktarma","TOTP & HOTP desteği"],ru:["Зашифрованные бэкапы","Кастомные иконки","Импорт из Google","TOTP & HOTP"]}},
+    {name:"AndOTP",icon:"🔑",repo:"andOTP/andOTP",dl:"https://github.com/andOTP/andOTP/releases",desc:{en:"Simple, secure two-factor authentication. Backup your tokens, protect them with a PIN or password, no Google account required.",tr:"Basit, güvenli iki faktörlü kimlik doğrulama. Tokenlarınızı yedekleyin, PIN veya parola ile koruyun.",ru:"Простая и безопасная двухфакторная аутентификация. Резервные копии токенов."},features:{en:["Password protected","Encrypted backup","Simple UI","No cloud needed"],tr:["Şifreyle korumalı","Şifreli yedek","Basit arayüz","Bulut gerekmez"],ru:["Защита паролем","Зашифрованный бэкап","Простой интерфейс","Без облака"]}},
+    {name:"Vaultwarden",icon:"🏰",repo:"dani-garcia/vaultwarden",dl:"https://github.com/dani-garcia/vaultwarden",desc:{en:"Self-hosted Bitwarden-compatible server. Full control of your password infrastructure on your own hardware.",tr:"Kendi sunucunda barındırılan Bitwarden uyumlu sunucu. Kendi donanımında şifre altyapısının tam kontrolü.",ru:"Самохостируемый сервер, совместимый с Bitwarden."},features:{en:["Self-hosted","Bitwarden compatible","Lightweight","All premium features free"],tr:["Kendi sunucunda","Bitwarden uyumlu","Hafif","Tüm premium özellikler ücretsiz"],ru:["Самохостинг","Совместим с Bitwarden","Лёгкий","Все функции бесплатны"]}},
+    {name:"ProtonPass",icon:"🔒",repo:"ProtonMail/android-pass",dl:"https://proton.me/pass",desc:{en:"From the makers of ProtonMail. End-to-end encrypted, hide-my-email aliases built in, zero tracking.",tr:"ProtonMail'in yapımcılarından. Uçtan uca şifreli, yerleşik e-posta takma adı gizleme.",ru:"От создателей ProtonMail. Сквозное шифрование, псевдонимы email."},features:{en:["E2E encrypted","Email aliases","Open source clients","Swiss privacy law"],tr:["Uçtan uca şifreli","E-posta takma adları","Açık kaynak istemciler","İsviçre gizlilik yasası"],ru:["E2E шифрование","Псевдонимы email","Открытый код","Швейцарские законы"]}},
+    {name:"Cryptomator",icon:"🔏",repo:"cryptomator/cryptomator",dl:"https://cryptomator.org/",desc:{en:"Encrypt your cloud files before they leave your device. Works with Dropbox, Google Drive, OneDrive — they store the encrypted blob, you hold the key.",tr:"Bulut dosyalarınızı cihazınızdan ayrılmadan önce şifreleyin. Dropbox, Google Drive, OneDrive ile çalışır.",ru:"Шифруй облачные файлы до их отправки. Работает с Dropbox, Google Drive."},features:{en:["Client-side encryption","Works with any cloud","Open source","Mobile + desktop"],tr:["İstemci taraflı şifreleme","Her bulutla çalışır","Açık kaynak","Mobil + masaüstü"],ru:["Клиентское шифрование","Любое облако","Открытый код","Мобильный + ПК"]}},
+    {name:"Tor Browser",icon:"🧅",repo:"torproject/tor-browser",dl:"https://www.torproject.org/download/",desc:{en:"Route your traffic through the onion network and vanish from trackers, surveillance, and censorship. The original privacy browser.",tr:"Trafiğinizi soğan ağından yönlendirin ve izleyicilerden, gözetimden, sansürden yok olun.",ru:"Маршрутизируй трафик через луковую сеть. Исчезни от трекеров и слежки."},features:{en:["Onion routing","Built-in NoScript","Anti-fingerprinting","Access .onion sites"],tr:["Soğan yönlendirme","Yerleşik NoScript","Parmak izi önleme",".onion sitelerine erişim"],ru:["Луковая маршрутизация","NoScript","Защита от fingerprinting","Onion-сайты"]}},
+    {name:"Brave Browser",icon:"🦁",repo:"brave/brave-browser",dl:"https://brave.com/download/",desc:{en:"Chrome-speed browsing with aggressive ad and tracker blocking built into the DNA. No extensions needed.",tr:"Agresif reklam ve izleyici engelleme ile Chrome hızında tarama. Uzantı gerekmez.",ru:"Скорость Chrome с агрессивной блокировкой рекламы и трекеров."},features:{en:["Built-in ad blocker","Fingerprint randomization","Shields protection","Tor private windows"],tr:["Yerleşik reklam engelleyici","Parmak izi rastgeleleştirme","Shields koruması","Tor özel pencereler"],ru:["Встроенный блокировщик","Рандомизация fingerprint","Shields","Tor-окна"]}},
+    {name:"Firefox",icon:"🦊",repo:"mozilla/gecko-dev",dl:"https://www.mozilla.org/firefox/",desc:{en:"The original open browser. Pair it with uBlock Origin and you have the most powerful privacy setup on desktop.",tr:"Orijinal açık tarayıcı. uBlock Origin ile eşleştirin ve masaüstünde en güçlü gizlilik kurulumuna sahip olun.",ru:"Оригинальный открытый браузер. В связке с uBlock Origin — мощная защита."},features:{en:["uBlock Origin compatible","Container tabs","Enhanced Tracking Protection","Cross-platform sync"],tr:["uBlock Origin uyumlu","Konteyner sekmeler","Gelişmiş İzleme Koruması","Çapraz platform senkronizasyonu"],ru:["uBlock Origin","Контейнерные вкладки","Защита от трекеров","Синхронизация"]}},
+    {name:"Mull Browser",icon:"🔵",repo:"Divested-Mobile/mull-fenix",dl:"https://f-droid.org/packages/us.spotco.mul/",desc:{en:"Firefox hardened for Android, pre-configured with maximum privacy settings. No Google services, no telemetry.",tr:"Android için güçlendirilmiş Firefox, maksimum gizlilik ayarlarıyla önceden yapılandırılmış.",ru:"Firefox, усиленный для Android с максимальными настройками приватности."},features:{en:["Hardened Firefox","No Google services","No telemetry","uBlock Origin ready"],tr:["Güçlendirilmiş Firefox","Google servisi yok","Telemetri yok","uBlock Origin hazır"],ru:["Усиленный Firefox","Без Google","Без телеметрии","uBlock Origin"]}},
+    {name:"DuckDuckGo Browser",icon:"🦆",repo:"duckduckgo/Android",dl:"https://duckduckgo.com/app",desc:{en:"Privacy browser with built-in tracker blocking, fire button to burn all browsing data, and DuckDuckGo search by default.",tr:"Yerleşik izleyici engelleyici, tüm tarama verilerini silmek için ateş düğmesi ve varsayılan olarak DuckDuckGo araması ile gizlilik tarayıcısı.",ru:"Браузер с блокировкой трекеров, кнопкой огня и поиском DuckDuckGo."},features:{en:["Fire button (clear all)","Tracker blocking","Email protection","Private search default"],tr:["Ateş düğmesi (hepsini temizle)","İzleyici engelleme","E-posta koruması","Özel arama varsayılan"],ru:["Кнопка огня","Блокировка трекеров","Защита email","Приватный поиск"]}},
+    {name:"Bromite",icon:"⚫",repo:"bromite/bromite",dl:"https://www.bromite.org/",desc:{en:"Chromium, deGoogled and hardened. Ad blocking built in at the network level. Fast, clean, minimal.",tr:"Chromium, Google'sız ve güçlendirilmiş. Ağ düzeyinde yerleşik reklam engelleme.",ru:"Chromium без Google, с сетевой блокировкой рекламы."},features:{en:["Ad blocking at network level","No Google account","Privacy patches","WebRTC leak protection"],tr:["Ağ düzeyinde reklam engelleme","Google hesabı yok","Gizlilik yamaları","WebRTC sızıntı koruması"],ru:["Сетевая блокировка рекламы","Без Google","Патчи приватности","WebRTC защита"]}},
+    {name:"NetGuard",icon:"🧱",repo:"M66B/NetGuard",dl:"https://netguard.me/",desc:{en:"Android firewall without root. Block any app from accessing the internet entirely. A revelation for data-hungry apps.",tr:"Root olmadan Android güvenlik duvarı. Herhangi bir uygulamanın internete tamamen erişimini engelleyin.",ru:"Брандмауэр для Android без root. Блокируй любое приложение."},features:{en:["No root required","Per-app blocking","Logging & filtering","FOSS version on F-Droid"],tr:["Root gerekmez","Uygulama başına engelleme","Kayıt ve filtreleme","F-Droid'de FOSS sürümü"],ru:["Без root","Блокировка по приложению","Логирование","FOSS на F-Droid"]}},
+    {name:"RethinkDNS",icon:"🌐",repo:"celzero/rethink-app",dl:"https://rethinkdns.com/app",desc:{en:"DNS-over-HTTPS, firewall, and VPN all in one. Block trackers at the DNS level before they even load.",tr:"Tek bir uygulamada DNS-over-HTTPS, güvenlik duvarı ve VPN. İzleyicileri yüklenmeden önce DNS düzeyinde engelleyin.",ru:"DNS-over-HTTPS, брандмауэр и VPN в одном приложении."},features:{en:["DNS-over-HTTPS","Built-in firewall","Tracker DNS blocklists","SOCKS5 proxy support"],tr:["DNS-over-HTTPS","Yerleşik güvenlik duvarı","İzleyici DNS engel listeleri","SOCKS5 proxy desteği"],ru:["DNS-over-HTTPS","Встроенный файрвол","DNS-блоклисты","SOCKS5"]}},
+    {name:"AdAway",icon:"🚫",repo:"AdAway/AdAway",dl:"https://adaway.org/",desc:{en:"System-wide ad blocker using hosts file or VPN. Block ads in every app, not just your browser.",tr:"Hosts dosyası veya VPN kullanarak sistem genelinde reklam engelleyici. Her uygulamada reklam engelleyin.",ru:"Системный блокировщик рекламы через hosts или VPN."},features:{en:["System-wide blocking","Hosts file method","VPN mode (no root)","Custom blocklists"],tr:["Sistem genelinde engelleme","Hosts dosyası yöntemi","VPN modu (root yok)","Özel engel listeleri"],ru:["Системная блокировка","Метод hosts","VPN-режим","Кастомные блоклисты"]}},
+    {name:"Shadowsocks",icon:"🌑",repo:"shadowsocks/shadowsocks-android",dl:"https://github.com/shadowsocks/shadowsocks-android",desc:{en:"Lightweight proxy protocol designed to bypass censorship. Fast, minimal, battle-tested worldwide.",tr:"Sansürü aşmak için tasarlanmış hafif proxy protokolü. Hızlı, minimal, dünya genelinde test edilmiş.",ru:"Лёгкий прокси для обхода цензуры. Быстрый, минималистичный."},features:{en:["Anti-censorship","Lightweight","TCP & UDP","Plugin support"],tr:["Sansür karşıtı","Hafif","TCP & UDP","Eklenti desteği"],ru:["Обход цензуры","Лёгкий","TCP и UDP","Плагины"]}},
+    {name:"Orbot",icon:"🧅",repo:"guardianproject/orbot",dl:"https://guardianproject.info/apps/org.torproject.android/",desc:{en:"Route all your apps through Tor, not just the browser. True network-level anonymity for your entire phone.",tr:"Tüm uygulamalarınızı sadece tarayıcı değil Tor üzerinden yönlendirin. Tüm telefonunuz için gerçek ağ düzeyinde anonimlik.",ru:"Маршрутизируй все приложения через Tor. Анонимность на уровне сети."},features:{en:["System-wide Tor routing","App-level VPN mode","No root needed","Works with any app"],tr:["Sistem genelinde Tor yönlendirme","Uygulama düzeyinde VPN modu","Root gerekmez","Her uygulamayla çalışır"],ru:["Tor для всех приложений","VPN-режим","Без root","Любое приложение"]}},
+    {name:"Invizible Pro",icon:"🔮",repo:"Gedsh/InviZible",dl:"https://invizible.net/en/",desc:{en:"DNSCrypt + Tor + I2P combined in one app. Three layers of anonymity with a single tap.",tr:"Tek bir uygulamada DNSCrypt + Tor + I2P. Tek dokunuşla üç katman anonimlik.",ru:"DNSCrypt + Tor + I2P в одном приложении. Три уровня анонимности."},features:{en:["DNSCrypt","Tor integration","I2P network","No root option"],tr:["DNSCrypt","Tor entegrasyonu","I2P ağı","Root opsiyonel"],ru:["DNSCrypt","Tor","I2P","Без root"]}},
+    {name:"OpenKeychain",icon:"🗝",repo:"open-keychain/open-keychain",dl:"https://www.openkeychain.org/",desc:{en:"GPG key management for Android. Sign, encrypt, and decrypt emails and files with true public key cryptography.",tr:"Android için GPG anahtar yönetimi. Gerçek açık anahtar kriptografisi ile e-postaları ve dosyaları imzalayın, şifreleyin.",ru:"Управление GPG-ключами для Android. Шифруй и подписывай файлы и email."},features:{en:["GPG key management","Email encryption (K-9)","File encryption","Key exchange via QR"],tr:["GPG anahtar yönetimi","E-posta şifreleme (K-9)","Dosya şifreleme","QR ile anahtar değişimi"],ru:["GPG-ключи","Шифрование email","Шифрование файлов","QR-обмен ключами"]}},
+    {name:"Tella",icon:"🌸",repo:"Horizontal-org/Tella-Android",dl:"https://tella-app.org/",desc:{en:"Designed for activists and journalists. Disguised as a calculator, hides photos, videos, and documents behind a PIN.",tr:"Aktivistler ve gazeteciler için tasarlandı. Hesap makinesi olarak gizlenmiş, fotoğrafları, videoları ve belgeleri PIN arkasına saklar.",ru:"Для активистов и журналистов. Замаскировано под калькулятор."},features:{en:["Hidden vault","Disguised as calculator","Encrypted storage","Quick delete"],tr:["Gizli kasa","Hesap makinesi olarak gizlenmiş","Şifreli depolama","Hızlı silme"],ru:["Скрытое хранилище","Маскировка под калькулятор","Шифрование","Быстрое удаление"]}},
+    {name:"Shelter",icon:"⛺",repo:"PeterCxy/Shelter",dl:"https://f-droid.org/packages/net.typeblog.shelter/",desc:{en:"Create an isolated work profile on Android to sandbox untrustworthy apps. Two personalities, one phone.",tr:"Güvenilmez uygulamaları sandbox yapmak için Android'de izole bir iş profili oluşturun.",ru:"Изолированный рабочий профиль для ненадёжных приложений."},features:{en:["Work profile sandboxing","Clone apps","Freeze background apps","Isolated data"],tr:["İş profili sandboxlama","Uygulama klonlama","Arka plan uygulamaları dondurma","İzole veri"],ru:["Sandbox профиль","Клонирование приложений","Заморозка фона","Изоляция данных"]}},
+    {name:"Island",icon:"🏝️",repo:"oasisfeng/island",dl:"https://play.google.com/store/apps/details?id=com.oasisfeng.island",desc:{en:"Greenify-style app isolation using Android's work profile. Freeze, clone, and sandbox invasive apps.",tr:"Android'in iş profilini kullanan Greenify tarzı uygulama izolasyonu.",ru:"Изоляция приложений в стиле Greenify через рабочий профиль."},features:{en:["App freezing","Work profile","Clone apps","Block background access"],tr:["Uygulama dondurma","İş profili","Uygulama klonlama","Arka plan erişimini engelleme"],ru:["Заморозка","Рабочий профиль","Клонирование","Блок фона"]}},
+    {name:"PrivacyBlur",icon:"🫥",repo:"MATHEMA-Software/PrivacyBlur",dl:"https://privacyblur.app/",desc:{en:"Blur or pixelate faces and sensitive info before sharing photos. Quick, intuitive, no upload needed.",tr:"Fotoğrafları paylaşmadan önce yüzleri ve hassas bilgileri bulanıklaştırın veya pikselleştirin.",ru:"Размывай лица и конфиденциальную информацию перед отправкой фото."},features:{en:["Face/object blur","Pixelate regions","No upload needed","Quick sharing"],tr:["Yüz/nesne bulanıklaştırma","Bölgeleri pikselleştirme","Yükleme gerekmez","Hızlı paylaşım"],ru:["Размытие лиц","Пикселизация","Без загрузки","Быстрая отправка"]}},
+    {name:"Wasted",icon:"💀",repo:"x13a/Wasted",dl:"https://github.com/x13a/Wasted",desc:{en:"Trigger a phone wipe if someone enters the wrong PIN too many times. Protect your data when your device is seized.",tr:"Biri yanlış PIN'i çok fazla girerse telefon silme işlemini tetikleyin. Cihazınıza el konulduğunda verilerinizi koruyun.",ru:"Сотри телефон при слишком многих неверных PIN-кодах. Защита при изъятии устройства."},features:{en:["Auto-wipe on wrong PIN","Tile/shortcut trigger","Silent wipe","Duress PIN"],tr:["Yanlış PIN'de otomatik silme","Karo/kısayol tetikleyici","Sessiz silme","Zorlama PIN"],ru:["Автовайп при неверном PIN","Триггер плитки","Тихий вайп","PIN принуждения"]}},
+    {name:"SnoopSnitch",icon:"🔍",repo:"G10h4ck/SnoopSnitch",dl:"https://srlabs.de/bites/snoopsnitch/",desc:{en:"Detect IMSI-catchers (fake cell towers) and SS7 attacks in real time. Know when you're being tracked by state actors.",tr:"IMSI yakalayıcıları (sahte baz istasyonları) ve SS7 saldırılarını gerçek zamanlı tespit edin.",ru:"Обнаруживай IMSI-перехватчики и SS7-атаки в реальном времени."},features:{en:["IMSI-catcher detection","SS7 attack alerts","Cell network analysis","Requires root"],tr:["IMSI yakalayıcı tespiti","SS7 saldırı uyarıları","Hücre ağı analizi","Root gerektirir"],ru:["Обнаружение IMSI-ловушек","SS7 alerts","Анализ сети","Требует root"]}},
+    {name:"TrackerControl",icon:"🕵️",repo:"TrackerControl/TrackerControl",dl:"https://trackercontrol.org/",desc:{en:"See which trackers hide inside your installed apps in real time. Block them with a tap.",tr:"Yüklü uygulamalarınızda hangi izleyicilerin gizlendiğini gerçek zamanlı görün. Bir dokunuşla engelleyin.",ru:"Смотри, какие трекеры скрыты в твоих приложениях. Блокируй одним касанием."},features:{en:["Real-time tracker detection","Per-app blocking","Company identification","Exodus Privacy data"],tr:["Gerçek zamanlı izleyici tespiti","Uygulama başına engelleme","Şirket tanımlama","Exodus Privacy verisi"],ru:["Обнаружение трекеров","Блокировка","Идентификация компаний","Данные Exodus"]}},
+    {name:"Exodus Privacy",icon:"🧬",repo:"Exodus-Privacy/exodus-android-app",dl:"https://exodus-privacy.eu.org/en/page/what/",desc:{en:"Audit any Android app for trackers and permissions before installing it. Knowledge is the first line of defense.",tr:"Herhangi bir Android uygulamasını yüklemeden önce izleyiciler ve izinler için denetleyin.",ru:"Аудит любого Android-приложения на трекеры и разрешения."},features:{en:["Pre-install audit","Tracker database","Permission analysis","Report history"],tr:["Kurulum öncesi denetim","İzleyici veritabanı","İzin analizi","Rapor geçmişi"],ru:["Аудит до установки","База трекеров","Анализ разрешений","История отчётов"]}},
+    {name:"Stratum",icon:"⏱",repo:"stratumauth/app",dl:"https://github.com/stratumauth/app",desc:{en:"A beautiful, modern TOTP authenticator built for people who want Aegis but with extra polish.",tr:"Aegis isteyen ama ekstra parlaklık isteyen insanlar için güzel, modern bir TOTP kimlik doğrulayıcı.",ru:"Красивый и современный TOTP-аутентификатор."},features:{en:["Material You design","Encrypted backups","TOTP/HOTP","Dark theme"],tr:["Material You tasarım","Şifreli yedekler","TOTP/HOTP","Karanlık tema"],ru:["Material You","Резервные копии","TOTP/HOTP","Тёмная тема"]}},
+    {name:"Keyoxide",icon:"🌿",repo:"nicktindall/keyoxide",dl:"https://keyoxide.org/",desc:{en:"Decentralized identity verification. Prove who you are online without relying on any single platform.",tr:"Merkezi olmayan kimlik doğrulama. Herhangi bir platforma güvenmeden çevrimiçi kim olduğunuzu kanıtlayın.",ru:"Децентрализованная верификация личности."},features:{en:["Decentralized","GPG-based proofs","No central authority","Privacy preserving"],tr:["Merkezi olmayan","GPG tabanlı kanıtlar","Merkezi otorite yok","Gizlilik koruyucu"],ru:["Децентрализация","GPG-доказательства","Без центра","Приватность"]}},
+    {name:"DPITunnel",icon:"🔧",repo:"zhenyolka/DPITunnel-android",dl:"https://github.com/zhenyolka/DPITunnel-android",desc:{en:"Bypass DPI-based censorship without VPN. Works at the TCP level to disguise your traffic.",tr:"VPN olmadan DPI tabanlı sansürü atlatın. Trafiğinizi gizlemek için TCP düzeyinde çalışır.",ru:"Обход DPI-цензуры без VPN. Работает на уровне TCP."},features:{en:["DPI bypass","No VPN needed","Anti-censorship","Low battery impact"],tr:["DPI atlatma","VPN gerekmez","Sansür karşıtı","Düşük pil tüketimi"],ru:["Обход DPI","Без VPN","Антицензура","Мало батареи"]}},
+    {name:"Hypatia",icon:"🛡",repo:"Divested-Mobile/Hypatia",dl:"https://f-droid.org/packages/us.spotco.malwarescanner/",desc:{en:"Real-time malware scanner for Android. Uses FOSS malware definition databases. No cloud scanning.",tr:"Android için gerçek zamanlı kötü amaçlı yazılım tarayıcısı. FOSS kötü amaçlı yazılım tanım veritabanlarını kullanır.",ru:"Антивирус реального времени для Android. Использует FOSS-базы."},features:{en:["Real-time scanning","Offline definitions","No cloud","FOSS databases"],tr:["Gerçek zamanlı tarama","Çevrimdışı tanımlar","Bulut yok","FOSS veritabanları"],ru:["Сканирование в реальном времени","Офлайн базы","Без облака","FOSS"]}},
+    {name:"Passky",icon:"🔓",repo:"Rabbit-Company/Passky-Android",dl:"https://passky.org/",desc:{en:"Minimalist open-source password manager with self-hosting option. Clean UI, fast, and no telemetry whatsoever.",tr:"Kendi sunucunda barındırma seçeneğiyle minimalist açık kaynak şifre yöneticisi. Temiz arayüz, hızlı, hiç telemetri yok.",ru:"Минималистичный менеджер паролей с открытым кодом и самохостингом."},features:{en:["Self-hostable","No telemetry","Minimalist UI","Strong encryption"],tr:["Kendi sunucunda barındırılabilir","Telemetri yok","Minimalist arayüz","Güçlü şifreleme"],ru:["Самохостинг","Без телеметрии","Минимализм","Сильное шифрование"]}},
+    {name:"AuthenticatorPro",icon:"🔐",repo:"jamie-mh/AuthenticatorPro",dl:"https://github.com/jamie-mh/AuthenticatorPro",desc:{en:"Two-factor authentication app with Material Design, encrypted cloud backup, and Wear OS support. The premium FOSS 2FA experience.",tr:"Material Design, şifreli bulut yedekleme ve Wear OS desteğiyle iki faktörlü kimlik doğrulama uygulaması.",ru:"2FA с Material Design, зашифрованным бэкапом и поддержкой Wear OS."},features:{en:["Wear OS support","Encrypted backup","Material Design","TOTP/HOTP/Steam"],tr:["Wear OS desteği","Şifreli yedekleme","Material Design","TOTP/HOTP/Steam"],ru:["Wear OS","Зашифрованный бэкап","Material Design","TOTP/HOTP/Steam"]}}
+  ],
+  video: [
+    {name:"NewPipe",icon:"📺",repo:"TeamNewPipe/NewPipe",dl:"https://newpipe.net/",desc:{en:"YouTube the way it was meant to be: no ads, no tracking, background play, and downloads. Once you go NewPipe, you can't go back.",tr:"YouTube'un olması gerektiği gibi: reklam yok, takip yok, arka planda oynatma ve indirmeler. NewPipe'a geçtikten sonra geri dönemezsiniz.",ru:"YouTube таким, каким он должен быть: без рекламы, без слежки, фоновое воспроизведение, загрузки."},features:{en:["Zero ads & tracking","Background play","Video/audio download","No Google account needed"],tr:["Sıfır reklam & takip","Arka planda oynatma","Video/ses indirme","Google hesabı gerekmez"],ru:["Без рекламы","Фоновое воспроизведение","Скачивание","Без Google аккаунта"]}},
+    {name:"Tubular",icon:"🎬",repo:"polymorphicshade/Tubular",dl:"https://github.com/polymorphicshade/Tubular",desc:{en:"NewPipe fork with SponsorBlock integration. Skip sponsor segments, intros, and outros automatically.",tr:"SponsorBlock entegrasyonu ile NewPipe çatalı. Sponsor segmentlerini, girişleri ve çıkışları otomatik olarak atlayın.",ru:"Форк NewPipe с SponsorBlock. Автоматически пропускай спонсорские сегменты."},features:{en:["SponsorBlock built-in","All NewPipe features","Intro/outro skip","Return YouTube Dislike"],tr:["Yerleşik SponsorBlock","Tüm NewPipe özellikleri","Giriş/çıkış atlama","YouTube Dislike'ı Geri Getir"],ru:["SponsorBlock","Все функции NewPipe","Пропуск интро/аутро","Return YouTube Dislike"]}},
+    {name:"LibreTube",icon:"🟥",repo:"libre-tube/LibreTube",dl:"https://libretube.dev/",desc:{en:"YouTube through the Piped API — no Google, no cookies, subscriptions without account. Stunningly clean interface.",tr:"Piped API üzerinden YouTube — Google yok, çerez yok, hesap olmadan abonelik. Çarpıcı derecede temiz arayüz.",ru:"YouTube через Piped API — без Google, без куки, подписки без аккаунта."},features:{en:["Piped API (no Google)","Account-free subscriptions","Sponsorblock","Beautiful Material UI"],tr:["Piped API (Google yok)","Hesapsız abonelikler","Sponsorblock","Güzel Material UI"],ru:["Piped API","Подписки без аккаунта","SponsorBlock","Material UI"]}},
+    {name:"SkyTube",icon:"🌌",repo:"SkyTubeTeam/SkyTube",dl:"https://skytube-app.com/",desc:{en:"Feature-rich YouTube client with video blocking, channel filters, and download support. No account required.",tr:"Video engelleme, kanal filtreleri ve indirme desteği ile özellik açısından zengin YouTube istemcisi.",ru:"Многофункциональный клиент YouTube с блокировкой видео и фильтрами каналов."},features:{en:["Channel blocking","Video star ratings","Download support","No account"],tr:["Kanal engelleme","Video yıldız derecelendirmeleri","İndirme desteği","Hesap gerekmez"],ru:["Блокировка каналов","Скачивание","Без аккаунта","Рейтинги"]}},
+    {name:"VLC Media Player",icon:"🟠",repo:"videolan/vlc-android",dl:"https://www.videolan.org/vlc/download-android.html",desc:{en:"The universal media player. Plays literally anything you throw at it, offline, no internet required, no spying.",tr:"Evrensel medya oynatıcı. Ona attığınız her şeyi oynatır, çevrimdışı, internet gerekmez, casus olmaz.",ru:"Универсальный медиаплеер. Воспроизводит всё что угодно, офлайн."},features:{en:["All formats supported","Hardware acceleration","Network streams","Audio equalizer"],tr:["Tüm formatlar desteklenir","Donanım hızlandırma","Ağ akışları","Ses ekolayzer"],ru:["Все форматы","Аппаратное ускорение","Сетевые потоки","Эквалайзер"]}},
+    {name:"mpv-android",icon:"⏯️",repo:"mpv-android/mpv-android",dl:"https://mpv.io/",desc:{en:"The most powerful media player on Android. Hardware decoding for everything, precise seeking, no fluff.",tr:"Android'deki en güçlü medya oynatıcı. Her şey için donanım dekodlama, hassas arama.",ru:"Самый мощный медиаплеер на Android. Аппаратное декодирование."},features:{en:["Hardware decoding","Precise A-B loop","Custom scripts","All formats"],tr:["Donanım dekodlama","Hassas A-B döngü","Özel komut dosyaları","Tüm formatlar"],ru:["Аппаратное декодирование","A-B петля","Скрипты","Все форматы"]}},
+    {name:"AntennaPod",icon:"📻",repo:"AntennaPod/AntennaPod",dl:"https://antennapod.org/",desc:{en:"Podcast manager that respects you. Subscribe, download, sync — without Spotify or Apple knowing what you listen to.",tr:"Sizi saygıyla karşılayan podcast yöneticisi. Spotify veya Apple ne dinlediğinizi bilmeden abone olun, indirin, senkronize edin.",ru:"Подкаст-менеджер с уважением к пользователю. Без Spotify и Apple."},features:{en:["OPML import/export","gpodder.net sync","Variable speed","Chapter navigation"],tr:["OPML içe/dışa aktarım","gpodder.net senkronizasyonu","Değişken hız","Bölüm navigasyonu"],ru:["OPML","gpodder.net","Изменение скорости","Навигация по главам"]}},
+    {name:"Spotube",icon:"🎵",repo:"KRTirtho/spotube",dl:"https://spotube.krtirtho.dev/",desc:{en:"Spotify UI, YouTube streams, no Spotify account required. All the playlists, none of the data harvest.",tr:"Spotify arayüzü, YouTube akışları, Spotify hesabı gerekmez. Tüm çalma listeleri, hiç veri toplama yok.",ru:"Интерфейс Spotify, потоки YouTube, без аккаунта Spotify."},features:{en:["No Spotify premium needed","YouTube audio backend","Local playlist import","Cross-platform"],tr:["Spotify premium gerekmez","YouTube ses arka planı","Yerel çalma listesi içe aktarma","Çapraz platform"],ru:["Без Premium","YouTube аудио","Локальные плейлисты","Кроссплатформенность"]}},
+    {name:"ViMusic",icon:"🎶",repo:"vfsfitvnm/vimusic",dl:"https://github.com/vfsfitvnm/vimusic",desc:{en:"Stream music from YouTube Music, completely free, no account. Stunning design that feels premium without the subscription.",tr:"YouTube Music'ten müzik akışı yapın, tamamen ücretsiz, hesap yok. Abonelik olmadan premium hissi veren çarpıcı tasarım.",ru:"Стриминг из YouTube Music, бесплатно, без аккаунта."},features:{en:["YouTube Music backend","Beautiful UI","Offline cache","Lyrics support"],tr:["YouTube Music arka planı","Güzel arayüz","Çevrimdışı önbellek","Söz desteği"],ru:["YouTube Music","Красивый UI","Офлайн кэш","Тексты песен"]}},
+    {name:"Finamp",icon:"🎸",repo:"jmshrv/finamp",dl:"https://github.com/jmshrv/finamp",desc:{en:"Jellyfin music client. Stream your self-hosted music library with gapless playback and offline sync.",tr:"Jellyfin müzik istemcisi. Gapless oynatma ve çevrimdışı senkronizasyon ile kendi sunucunuzdaki müzik kütüphanesini akışla yayınlayın.",ru:"Клиент Jellyfin для музыки. Потоки из своей библиотеки."},features:{en:["Jellyfin integration","Gapless playback","Offline sync","Material design"],tr:["Jellyfin entegrasyonu","Gapless oynatma","Çevrimdışı senkronizasyon","Material tasarım"],ru:["Jellyfin","Gapless","Офлайн синхронизация","Material"]}},
+    {name:"Kodi",icon:"📡",repo:"xbmc/xbmc",dl:"https://kodi.tv/",desc:{en:"The home theater OS for your phone and TV. Stream local network media, online services, and everything in between.",tr:"Telefon ve televizyonunuz için ev sinema işletim sistemi. Yerel ağ medyasını, çevrimiçi hizmetleri ve arasındaki her şeyi akışla yayınlayın.",ru:"Домашний медиацентр для телефона и ТВ."},features:{en:["All media formats","Network streaming","Addon ecosystem","TV remote support"],tr:["Tüm medya formatları","Ağ akışı","Eklenti ekosistemi","TV uzaktan kumanda desteği"],ru:["Все форматы","Сетевой стриминг","Аддоны","Пульт ТВ"]}},
+    {name:"Jellyfin",icon:"🎞",repo:"jellyfin/jellyfin-android",dl:"https://jellyfin.org/",desc:{en:"Self-hosted Netflix. Run your own streaming server with movies, TV shows, and music. No subscription, ever.",tr:"Kendi kendine barındırılan Netflix. Film, dizi ve müziklerinizle kendi akış sunucunuzu çalıştırın.",ru:"Самохостируемый Netflix. Свой стриминг без подписки."},features:{en:["Self-hosted","Movies, TV, Music","Live TV & DVR","No subscription needed"],tr:["Kendi sunucunda","Film, Dizi, Müzik","Canlı TV & DVR","Abonelik gerekmez"],ru:["Самохостинг","Фильмы, ТВ, Музыка","Live TV","Без подписки"]}},
+    {name:"Fritter",icon:"🐦",repo:"jonjomckay/fritter",dl:"https://fritter.cc/",desc:{en:"Browse Twitter/X without an account, without tracking, without the algorithm feeding you outrage. Read-only bliss.",tr:"Hesap olmadan, takip olmadan, sizi öfke besleyen algoritma olmadan Twitter/X'e göz atın.",ru:"Просматривай Twitter/X без аккаунта, без слежки, без алгоритма."},features:{en:["No account needed","No tracking","Timeline control","Poll support"],tr:["Hesap gerekmez","Takip yok","Zaman çizelgesi kontrolü","Anket desteği"],ru:["Без аккаунта","Без слежки","Контроль ленты","Опросы"]}},
+    {name:"ReVanced",icon:"🔵",repo:"ReVanced/revanced-manager",dl:"https://revanced.app/",desc:{en:"Patch YouTube, YouTube Music, Reddit, and more — add SponsorBlock, remove ads, unlock premium features.",tr:"YouTube, YouTube Music, Reddit ve daha fazlasını yamayın — SponsorBlock ekleyin, reklamları kaldırın, premium özelliklerin kilidini açın.",ru:"Патч YouTube, Reddit и других. Реклама долой, премиум включить."},features:{en:["Ad removal patches","SponsorBlock","Background play for YT","Modular patch system"],tr:["Reklam kaldırma yamaları","SponsorBlock","YT arka plan oynatma","Modüler yama sistemi"],ru:["Удаление рекламы","SponsorBlock","Фоновое YT","Модульные патчи"]}},
+    {name:"Grayjay",icon:"🎥",repo:"futo-org/grayjay-android",dl:"https://grayjay.app/",desc:{en:"One app for YouTube, Twitch, Spotify, and 20+ platforms — without any of their tracking. Own your feed.",tr:"YouTube, Twitch, Spotify ve 20'den fazla platform için tek uygulama — herhangi bir takipleri olmadan.",ru:"Один плеер для YouTube, Twitch, Spotify и 20+ платформ без слежки."},features:{en:["20+ platform support","Unified feed","Download support","FUTO backed"],tr:["20'den fazla platform desteği","Birleşik akış","İndirme desteği","FUTO destekli"],ru:["20+ платформ","Единая лента","Загрузки","FUTO"]}},
+    {name:"Cloudstream-3",icon:"☁️",repo:"recloudstream/cloudstream-3",dl:"https://github.com/recloudstream/cloudstream-3",desc:{en:"Stream movies, TV shows, and anime from dozens of sources. Extensible via plugins, no account needed.",tr:"Düzinelerce kaynaktan film, dizi ve anime akışı yapın. Eklentiler aracılığıyla genişletilebilir, hesap gerekmez.",ru:"Стриминг фильмов, сериалов и аниме из десятков источников."},features:{en:["Plugin system","Movie, TV, Anime","No account","Subtitle support"],tr:["Eklenti sistemi","Film, Dizi, Anime","Hesap yok","Alt yazı desteği"],ru:["Плагины","Фильмы, ТВ, Аниме","Без аккаунта","Субтитры"]}},
+    {name:"Podverse",icon:"🎙",repo:"podverse/podverse-fdroid",dl:"https://podverse.fm/",desc:{en:"Open podcast app with cross-app clips, comments, and chapters. The most feature-complete FOSS podcast client.",tr:"Uygulamalar arası klip, yorum ve bölümlerle açık podcast uygulaması.",ru:"Открытый подкаст-клиент с клипами, комментариями и главами."},features:{en:["Cross-app clips","Chapters","Comments","Value4Value"],tr:["Uygulamalar arası klipler","Bölümler","Yorumlar","Value4Value"],ru:["Клипы","Главы","Комментарии","Value4Value"]}},
+    {name:"Transistor",icon:"📡",repo:"y20k/transistor",dl:"https://codeberg.org/y20k/transistor",desc:{en:"Simple radio app. Search, add, and play internet radio stations. Minimal, clean, zero tracking.",tr:"Basit radyo uygulaması. İnternet radyo istasyonlarını arayın, ekleyin ve oynatın.",ru:"Простое радио. Поиск, добавление и воспроизведение интернет-станций."},features:{en:["Radio directory search","Background playback","Sleep timer","Minimal design"],tr:["Radyo dizini arama","Arka plan oynatma","Uyku zamanlayıcısı","Minimal tasarım"],ru:["Поиск станций","Фоновое воспроизведение","Таймер сна","Минимализм"]}},
+    {name:"DankChat",icon:"💬",repo:"flex3r/DankChat",dl:"https://github.com/flex3r/DankChat",desc:{en:"Twitch chat client with BTTV, FFZ, and 7TV emote support. Everything the official app refuses to do.",tr:"BTTV, FFZ ve 7TV emote desteği ile Twitch sohbet istemcisi.",ru:"Клиент Twitch-чата с BTTV, FFZ и 7TV."},features:{en:["BTTV/FFZ/7TV emotes","Multi-channel","Notification filters","No Twitch account tracking"],tr:["BTTV/FFZ/7TV emoteler","Çok kanallı","Bildirim filtreleri","Twitch hesap takibi yok"],ru:["BTTV/FFZ/7TV","Несколько каналов","Фильтры уведомлений","Без слежки"]}},
+    {name:"Read You",icon:"📖",repo:"Ashinch/ReadYou",dl:"https://github.com/Ashinch/ReadYou",desc:{en:"Beautiful RSS/Atom reader built with Material You. Your news feed, curated by you, not by an algorithm.",tr:"Material You ile oluşturulmuş güzel RSS/Atom okuyucu. Haberleriniz bir algoritma tarafından değil, sizin tarafınızdan seçilmiş.",ru:"Красивый RSS/Atom-ридер на Material You. Твоя лента, без алгоритмов."},features:{en:["Material You design","Full-text fetch","Filter rules","OPML import"],tr:["Material You tasarım","Tam metin getirme","Filtre kuralları","OPML içe aktarma"],ru:["Material You","Полный текст","Правила фильтрации","OPML"]}},
+    {name:"Feeder",icon:"📰",repo:"spacecowboy/Feeder",dl:"https://f-droid.org/packages/com.nononsenseapps.feeder/",desc:{en:"Offline-first RSS reader. No account, no server, reads RSS directly. Your news, your phone, period.",tr:"Çevrimdışı öncelikli RSS okuyucu. Hesap yok, sunucu yok, RSS'yi doğrudan okur.",ru:"RSS-ридер с приоритетом офлайн. Без аккаунта и сервера."},features:{en:["Offline sync","No account needed","Material design","Full article view"],tr:["Çevrimdışı senkronizasyon","Hesap gerekmez","Material tasarım","Tam makale görünümü"],ru:["Офлайн синхронизация","Без аккаунта","Material","Полный текст"]}},
+    {name:"Seal",icon:"🦭",repo:"JunkFood02/Seal",dl:"https://github.com/JunkFood02/Seal",desc:{en:"yt-dlp frontend for Android. Download video and audio from YouTube, Spotify, and 1000+ sites in seconds.",tr:"Android için yt-dlp ön yüzü. YouTube, Spotify ve 1000'den fazla siteden saniyeler içinde video ve ses indirin.",ru:"Фронтенд yt-dlp для Android. Скачивай с YouTube, Spotify и 1000+ сайтов."},features:{en:["yt-dlp powered","1000+ sites","Format selection","Material You"],tr:["yt-dlp tabanlı","1000'den fazla site","Format seçimi","Material You"],ru:["yt-dlp","1000+ сайтов","Выбор формата","Material You"]}},
+    {name:"Piped",icon:"🔴",repo:"TeamPiped/Piped",dl:"https://piped.video/",desc:{en:"Web-based YouTube frontend via Piped — no Google tracking, subscriptions without an account, works in any browser.",tr:"Piped aracılığıyla web tabanlı YouTube ön yüzü — Google takibi yok, hesap olmadan abonelik.",ru:"Веб-интерфейс YouTube через Piped — без слежки Google."},features:{en:["No Google tracking","Account-free subs","Works in browser","Open source"],tr:["Google takibi yok","Hesapsız abonelikler","Tarayıcıda çalışır","Açık kaynak"],ru:["Без Google","Без аккаунта","В браузере","Открытый код"]}},
+    {name:"Invidious",icon:"🎞️",repo:"iv-org/invidious",dl:"https://invidious.io/",desc:{en:"Self-hostable YouTube frontend. Run your own private YouTube proxy or use a public instance. Zero Google DNS calls.",tr:"Kendi sunucunuzda barındırılabilir YouTube ön yüzü. Kendi özel YouTube proxy'nizi çalıştırın.",ru:"Самохостируемый фронтенд YouTube. Ноль запросов к Google."},features:{en:["Self-hostable","Subscriptions without account","RSS feeds","Zero Google calls"],tr:["Kendi sunucunda barındırılabilir","Hesapsız abonelikler","RSS beslemeleri","Sıfır Google çağrısı"],ru:["Самохостинг","Без аккаунта","RSS","Ноль Google"]}},
+    {name:"Tempo",icon:"🎼",repo:"CappielloAntonio/tempo",dl:"https://github.com/CappielloAntonio/tempo",desc:{en:"Subsonic/Navidrome client with a gorgeous UI. Stream your personal music library with album art and offline mode.",tr:"Muhteşem arayüzlü Subsonic/Navidrome istemcisi. Albüm kapağı ve çevrimdışı modla kişisel müzik kitaplığınızı akışla yayınlayın.",ru:"Клиент Subsonic/Navidrome с шикарным интерфейсом."},features:{en:["Subsonic compatible","Offline downloads","Scrobbling","Album art"],tr:["Subsonic uyumlu","Çevrimdışı indirmeler","Scrobbling","Albüm kapağı"],ru:["Subsonic","Офлайн","Scrobbling","Обложки"]}},
+    {name:"Harmonoid",icon:"🎹",repo:"harmonoid/harmonoid",dl:"https://harmonoid.com/",desc:{en:"Music player with automatic metadata tagging, beautiful cards UI, and powerful library management. The most elegant local music app.",tr:"Otomatik meta veri etiketleme, güzel kart arayüzü ve güçlü kütüphane yönetimi ile müzik oynatıcı.",ru:"Музыкальный плеер с автоматической разметкой метаданных и красивым UI."},features:{en:["Auto metadata tags","Beautiful card UI","Library management","Lyrics support"],tr:["Otomatik meta veri etiketleri","Güzel kart arayüzü","Kütüphane yönetimi","Söz desteği"],ru:["Автоматические теги","Красивый UI","Управление библиотекой","Тексты песен"]}},
+    {name:"BlackHole",icon:"🎵",repo:"Sangwan5688/BlackHole",dl:"https://sangwan5688.github.io/BlackHole/",desc:{en:"Music streaming app for JioSaavn, Spotify, YouTube, and more. Offline downloads, lyrics, beautiful design — fully open source.",tr:"JioSaavn, Spotify, YouTube ve daha fazlası için müzik akışı uygulaması. Çevrimdışı indirmeler, sözler, güzel tasarım.",ru:"Стриминг музыки с JioSaavn, Spotify, YouTube. Офлайн загрузки, тексты."},features:{en:["Multiple music sources","Offline downloads","Lyrics support","Beautiful Material UI"],tr:["Çoklu müzik kaynakları","Çevrimdışı indirmeler","Söz desteği","Güzel Material UI"],ru:["Несколько источников","Офлайн","Тексты","Material UI"]}},
+    {name:"mpv-cast",icon:"📲",repo:"nicholasgasior/mpv-cast",dl:"https://github.com/nicholasgasior/mpv-cast",desc:{en:"Cast any local video to your TV using mpv and Chromecast without Google's app ecosystem.",tr:"Google'ın uygulama ekosistemi olmadan mpv ve Chromecast kullanarak yerel videoyu TV'nize yayınlayın.",ru:"Трансляция локального видео на ТВ через mpv без экосистемы Google."},features:{en:["Chromecast support","No Google account","Local files","Open source"],tr:["Chromecast desteği","Google hesabı yok","Yerel dosyalar","Açık kaynak"],ru:["Chromecast","Без Google","Локальные файлы","Открытый код"]}}
+  ],
+  communication: [
+    {name:"SimpleX Chat",icon:"🔗",repo:"simplex-chat/simplex-android",dl:"https://simplex.chat/",desc:{en:"No user identifiers — not even a username. The only messenger that provably can't link your messages to any identity.",tr:"Kullanıcı tanımlayıcıları yok — kullanıcı adı bile değil. Mesajlarınızı herhangi bir kimliğe bağlayamazlığı kanıtlanabilecek tek mesajlaşma aracı.",ru:"Нет идентификаторов пользователя — даже ника. Единственный мессенджер без возможности привязки."},features:{en:["No user IDs","No metadata","Double ratchet encryption","Incognito mode"],tr:["Kullanıcı kimliği yok","Meta veri yok","Çift mandallı şifreleme","İnkognito modu"],ru:["Без ID","Без метаданных","Double ratchet","Инкогнито"]}},
+    {name:"Delta Chat",icon:"✉️",repo:"deltachat/deltachat-android",dl:"https://delta.chat/",desc:{en:"Chat over email. Uses Signal-level encryption over the existing email infrastructure. No special server needed.",tr:"E-posta üzerinden sohbet. Mevcut e-posta altyapısı üzerinden Signal düzeyinde şifreleme kullanır.",ru:"Чат через email. Signal-уровень шифрования поверх существующей почты."},features:{en:["Email compatible","Autocrypt encryption","No special server","Works with any email provider"],tr:["E-posta uyumlu","Autocrypt şifreleme","Özel sunucu gerekmez","Herhangi bir e-posta sağlayıcısıyla çalışır"],ru:["Совместимость с email","Autocrypt","Без спецсервера","Любой провайдер"]}},
+    {name:"Element (Matrix)",icon:"🌐",repo:"element-hq/element-android",dl:"https://element.io/",desc:{en:"Decentralized, federated messaging on the Matrix protocol. No central server owns your conversations. Bridge to everything.",tr:"Matrix protokolünde merkezi olmayan, federasyonlu mesajlaşma. Hiçbir merkezi sunucu konuşmalarınıza sahip değil.",ru:"Децентрализованный мессенджер на протоколе Matrix."},features:{en:["Federated protocol","Bridges to other networks","E2E by default","Self-hosting option"],tr:["Federasyonlu protokol","Diğer ağlara köprüler","Varsayılan olarak E2E","Kendi sunucunda barındırma"],ru:["Федерация","Мосты к другим сетям","E2E","Самохостинг"]}},
+    {name:"Molly (Signal fork)",icon:"🔷",repo:"mollyim/mollyim-android",dl:"https://molly.im/",desc:{en:"Signal with extra security. Locks database at screen off, RAM wipe on idle, FOSS build without proprietary libs.",tr:"Ekstra güvenlikli Signal. Ekran kapandığında veritabanını kilitler, boşta RAM silme işlemi yapar.",ru:"Signal с усиленной безопасностью. Шифрует БД при выключении экрана."},features:{en:["Database encryption at rest","RAM wipe on idle","No proprietary libraries","Signal compatible"],tr:["Dinlenirken veritabanı şifreleme","Boşta RAM silme","Tescilli kütüphane yok","Signal uyumlu"],ru:["Шифрование БД","Очистка RAM","Без проприетарных библиотек","Совместим с Signal"]}},
+    {name:"Briar",icon:"🌿",repo:"briarproject/briar",dl:"https://briarproject.org/",desc:{en:"Mesh messaging without internet. Sync over Bluetooth, WiFi, or Tor. Works even when the internet is cut off.",tr:"İnternetsiz örgü mesajlaşma. Bluetooth, WiFi veya Tor üzerinden senkronize edin. İnternet kesildiğinde bile çalışır.",ru:"Мессенджер без интернета. Через Bluetooth, WiFi или Tor."},features:{en:["Bluetooth/WiFi/Tor sync","No server needed","No phone number","Censorship resistant"],tr:["Bluetooth/WiFi/Tor senkronizasyonu","Sunucu gerekmez","Telefon numarası gerekmez","Sansür dirençli"],ru:["Bluetooth/WiFi/Tor","Без сервера","Без номера телефона","Устойчивость к цензуре"]}},
+    {name:"Threema",icon:"🟢",repo:"threema-ch/threema-android",dl:"https://threema.ch/en",desc:{en:"No phone number, no email, just a random ID. Swiss privacy law, E2E encrypted, open source since 2020.",tr:"Telefon numarası yok, e-posta yok, sadece rastgele bir ID. İsviçre gizlilik hukuku, E2E şifreli.",ru:"Без номера телефона, без email. Швейцарские законы, E2E."},features:{en:["No phone number needed","Swiss data protection","E2E encrypted","Polls & files"],tr:["Telefon numarası gerekmez","İsviçre veri koruması","Uçtan uca şifreli","Anketler & dosyalar"],ru:["Без номера","Швейцарская защита","E2E","Опросы и файлы"]}},
+    {name:"Session",icon:"🟡",repo:"oxen-io/session-android",dl:"https://getsession.org/",desc:{en:"No phone number, no email, no metadata. Built on a blockchain-inspired network. Anonymous by design.",tr:"Telefon numarası yok, e-posta yok, meta veri yok. Blockchain ilhamlı ağ üzerine inşa edilmiş.",ru:"Без номера, без email, без метаданных. Анонимность по дизайну."},features:{en:["No identifier required","Decentralized network","Onion routing","No metadata"],tr:["Tanımlayıcı gerekmez","Merkezi olmayan ağ","Soğan yönlendirme","Meta veri yok"],ru:["Без идентификатора","Децентрализованная сеть","Луковая маршрутизация","Без метаданных"]}},
+    {name:"Telegram FOSS",icon:"✈️",repo:"Telegram-FOSS/Telegram-FOSS",dl:"https://f-droid.org/packages/org.telegram.messenger/",desc:{en:"Telegram without proprietary Google Firebase components. Same features, fully open build, no crash reporting to Google.",tr:"Tescilli Google Firebase bileşenleri olmadan Telegram. Aynı özellikler, tamamen açık derleme.",ru:"Telegram без проприетарных компонентов Google Firebase."},features:{en:["No Firebase","Full Telegram features","F-Droid installable","No Google services needed"],tr:["Firebase yok","Tam Telegram özellikleri","F-Droid ile kurulabilir","Google servisi gerekmez"],ru:["Без Firebase","Все функции","F-Droid","Без Google"]}},
+    {name:"Thunderbird",icon:"⚡",repo:"mozilla-mobile/thunderbird-android",dl:"https://www.thunderbird.net/",desc:{en:"Mozilla's legendary email client, now on Android. IMAP, POP3, multiple accounts — no data harvesting, ever.",tr:"Mozilla'nın efsanevi e-posta istemcisi, artık Android'de. IMAP, POP3, çoklu hesaplar — veri toplama asla yok.",ru:"Легендарный email-клиент Mozilla, теперь на Android."},features:{en:["Multiple accounts","PGP/OpenPGP","Unified inbox","No data collection"],tr:["Çoklu hesaplar","PGP/OpenPGP","Birleşik gelen kutusu","Veri toplama yok"],ru:["Несколько аккаунтов","PGP","Единый ящик","Без сбора данных"]}},
+    {name:"K-9 Mail",icon:"🐕",repo:"thunderbird/thunderbird-android",dl:"https://k9mail.app/",desc:{en:"The OG open-source email client for Android. Now being merged into Thunderbird. Rock-solid, battle-tested.",tr:"Android için orijinal açık kaynak e-posta istemcisi. Şimdi Thunderbird ile birleştiriliyor.",ru:"OG открытый email-клиент для Android. Сейчас объединяется с Thunderbird."},features:{en:["OpenPGP via OpenKeychain","Multiple accounts","Push notifications","Offline support"],tr:["OpenKeychain aracılığıyla OpenPGP","Çoklu hesaplar","Push bildirimleri","Çevrimdışı destek"],ru:["OpenPGP","Несколько аккаунтов","Push-уведомления","Офлайн"]}},
+    {name:"Mastodon",icon:"🐘",repo:"mastodon/mastodon-android",dl:"https://joinmastodon.org/",desc:{en:"Twitter without the algorithm, the ads, and the billionaire owner. Federated, open protocol, you pick your server.",tr:"Algoritma, reklam ve milyarder sahibi olmadan Twitter. Federasyonlu, açık protokol, sunucunuzu siz seçin.",ru:"Twitter без алгоритма, рекламы и миллиардера. Федерация, открытый протокол."},features:{en:["No algorithm","Federated","Chronological feed","Open ActivityPub protocol"],tr:["Algoritma yok","Federasyonlu","Kronolojik akış","Açık ActivityPub protokolü"],ru:["Без алгоритма","Федерация","Хронологическая лента","ActivityPub"]}},
+    {name:"Pixelfed",icon:"📷",repo:"pixelfed/pixelfed",dl:"https://pixelfed.org/",desc:{en:"Instagram without the surveillance. Photo sharing on the Fediverse. Beautiful, fast, chronological feed, no ads.",tr:"Gözetim olmadan Instagram. Fediverse'de fotoğraf paylaşımı. Güzel, hızlı, kronolojik akış, reklam yok.",ru:"Instagram без слежки. Фотошеринг в Fediverse."},features:{en:["No ads","Fediverse compatible","Stories support","No algorithmic feed"],tr:["Reklam yok","Fediverse uyumlu","Hikaye desteği","Algoritmik akış yok"],ru:["Без рекламы","Fediverse","Истории","Без алгоритма"]}},
+    {name:"Lemmy",icon:"🐾",repo:"LemmyNet/lemmy",dl:"https://join-lemmy.org/",desc:{en:"Reddit done right. Federated communities, open voting, no advertising model, no shadowbanning nonsense.",tr:"Doğru yapılmış Reddit. Federasyonlu topluluklar, açık oylama, reklam modeli yok, shadowban saçmalığı yok.",ru:"Reddit как надо. Федерация, открытое голосование, без рекламы."},features:{en:["Reddit-like communities","Federated","No ads","Open source server"],tr:["Reddit benzeri topluluklar","Federasyonlu","Reklam yok","Açık kaynak sunucu"],ru:["Reddit-подобные сообщества","Федерация","Без рекламы","Открытый сервер"]}},
+    {name:"Jerboa (Lemmy)",icon:"🦘",repo:"LemmyNet/jerboa",dl:"https://github.com/LemmyNet/jerboa",desc:{en:"The official Lemmy Android app. Browse federated Reddit-like communities without leaving any data trail.",tr:"Resmi Lemmy Android uygulaması. Herhangi bir veri izi bırakmadan federasyonlu Reddit benzeri toplulukları gezin.",ru:"Официальное Android-приложение Lemmy."},features:{en:["Native Android","All Lemmy features","Material design","Multiple accounts"],tr:["Yerel Android","Tüm Lemmy özellikleri","Material tasarım","Çoklu hesaplar"],ru:["Нативный Android","Все функции","Material","Несколько аккаунтов"]}},
+    {name:"Infinity for Reddit",icon:"♾️",repo:"Docile-Alligator/Infinity-For-Reddit",dl:"https://github.com/Docile-Alligator/Infinity-For-Reddit",desc:{en:"The Reddit client that made the old Reddit API ban a tragedy. Beautiful, fast, infinite scroll done right.",tr:"Eski Reddit API yasağını bir trajedi haline getiren Reddit istemcisi.",ru:"Reddit-клиент, из-за которого запрет API стал трагедией."},features:{en:["Lazy mode (auto-scroll)","Material design","GIF playback","No ads"],tr:["Tembel mod (otomatik kaydırma)","Material tasarım","GIF oynatma","Reklam yok"],ru:["Ленивый режим","Material","GIF","Без рекламы"]}},
+    {name:"Tusky",icon:"🐘",repo:"tuskyapp/Tusky",dl:"https://tusky.app/",desc:{en:"Fast, polished Mastodon client. The best way to experience the Fediverse on Android.",tr:"Hızlı, cilalı Mastodon istemcisi. Android'de Fediverse'yi deneyimlemenin en iyi yolu.",ru:"Быстрый и отполированный клиент Mastodon."},features:{en:["Multiple accounts","Push notifications","Filter support","Media player"],tr:["Çoklu hesaplar","Push bildirimleri","Filtre desteği","Medya oynatıcı"],ru:["Несколько аккаунтов","Push","Фильтры","Медиаплеер"]}},
+    {name:"Rocket.Chat",icon:"🚀",repo:"RocketChat/Rocket.Chat.ReactNative",dl:"https://rocket.chat/",desc:{en:"Self-hosted team messaging. Replace Slack with something you control, on your own servers.",tr:"Kendi sunucunuzda barındırılan ekip mesajlaşması. Slack'i kendi sunucularınızda kontrol edebileceğiniz bir şeyle değiştirin.",ru:"Самохостируемый мессенджер для команд. Замени Slack на то, что контролируешь."},features:{en:["Self-hosted","Slack alternative","Video calls","E2E encryption option"],tr:["Kendi sunucunda","Slack alternatifi","Görüntülü aramalar","E2E şifreleme seçeneği"],ru:["Самохостинг","Альтернатива Slack","Видеозвонки","E2E"]}},
+    {name:"Jitsi Meet",icon:"🎦",repo:"jitsi/jitsi-meet",dl:"https://jitsi.org/jitsi-meet/",desc:{en:"Video calls without a Zoom account. Open, self-hostable, works in browser. No account needed for guests.",tr:"Zoom hesabı olmadan görüntülü aramalar. Açık, kendi sunucunuzda barındırılabilir, tarayıcıda çalışır.",ru:"Видеозвонки без Zoom-аккаунта. Открытый, самохостируемый."},features:{en:["No account for guests","Self-hostable","Browser compatible","Screen sharing"],tr:["Misafirler için hesap gerekmez","Kendi sunucunda barındırılabilir","Tarayıcı uyumlu","Ekran paylaşımı"],ru:["Без аккаунта для гостей","Самохостинг","В браузере","Демонстрация экрана"]}},
+    {name:"Mumble",icon:"🎤",repo:"mumble-voip/mumble",dl:"https://www.mumble.info/",desc:{en:"Low-latency voice chat for teams and gamers. Self-hosted, open source, near-zero CPU usage.",tr:"Ekipler ve oyuncular için düşük gecikmeli sesli sohbet. Kendi sunucunuzda, açık kaynak, neredeyse sıfır CPU kullanımı.",ru:"Голосовой чат с низкой задержкой. Самохостинг, открытый код."},features:{en:["Ultra-low latency","Self-hosted","Opus codec","Positional audio"],tr:["Ultra düşük gecikme","Kendi sunucunda","Opus kodek","Konumsal ses"],ru:["Низкая задержка","Самохостинг","Opus","Позиционный звук"]}},
+    {name:"Nitter",icon:"🐤",repo:"zedeus/nitter",dl:"https://nitter.net/",desc:{en:"Twitter/X frontend without surveillance. View profiles, threads, and media without a Twitter account or cookies.",tr:"Gözetim olmadan Twitter/X ön yüzü. Twitter hesabı veya çerez olmadan profilleri, konuları ve medyayı görüntüleyin.",ru:"Фронтенд Twitter без слежки. Без аккаунта и куков."},features:{en:["No Twitter account needed","No tracking","RSS feeds","Fast loading"],tr:["Twitter hesabı gerekmez","Takip yok","RSS beslemeleri","Hızlı yükleme"],ru:["Без аккаунта Twitter","Без слежки","RSS","Быстро"]}},
+    {name:"Fedilab",icon:"🌍",repo:"stom79/Fedilab",dl:"https://fedilab.app/",desc:{en:"Multi-account Fediverse client for Mastodon, Pleroma, Friendica, PeerTube, and more.",tr:"Mastodon, Pleroma, Friendica, PeerTube ve daha fazlası için çok hesaplı Fediverse istemcisi.",ru:"Мультиаккаунтный клиент Fediverse для Mastodon, Pleroma, PeerTube."},features:{en:["Multi-account","Multiple Fediverse platforms","Scheduled posts","Translation support"],tr:["Çoklu hesap","Çoklu Fediverse platformları","Zamanlanmış gönderiler","Çeviri desteği"],ru:["Мультиаккаунт","Несколько платформ","Запланированные посты","Перевод"]}},
+    {name:"ProtonMail",icon:"🔴",repo:"ProtonMail/proton-mail-android",dl:"https://proton.me/mail",desc:{en:"Zero-access E2E encrypted email from Switzerland. ProtonMail cannot read your emails even if forced to.",tr:"İsviçre'den sıfır erişimli E2E şifreli e-posta. ProtonMail, zorlanmış olsa bile e-postalarınızı okuyamaz.",ru:"E2E-шифрованная почта из Швейцарии. Proton не может читать письма."},features:{en:["Zero-access encryption","Swiss servers","Custom domains","Proton ecosystem"],tr:["Sıfır erişim şifreleme","İsviçre sunucuları","Özel alan adları","Proton ekosistemi"],ru:["Нулевой доступ","Швейцарские серверы","Свои домены","Экосистема Proton"]}},
+    {name:"Tutanota",icon:"🟠",repo:"tutao/tutanota",dl:"https://tuta.com/",desc:{en:"Fully encrypted email — subject, body, and attachments. German privacy law. Calendars encrypted too.",tr:"Tamamen şifreli e-posta — konu, gövde ve ekler. Alman gizlilik hukuku. Takvimler de şifreli.",ru:"Полностью зашифрованная почта: тема, тело, вложения. Немецкое право."},features:{en:["Subject encrypted","Calendar encrypted","German privacy law","E2E by default"],tr:["Konu şifreli","Takvim şifreli","Alman gizlilik hukuku","Varsayılan olarak E2E"],ru:["Шифрование темы","Зашифрованный календарь","Немецкое право","E2E по умолчанию"]}},
+    {name:"Mattermost",icon:"💼",repo:"mattermost/mattermost-mobile",dl:"https://mattermost.com/",desc:{en:"Enterprise Slack alternative, self-hosted, open source. Your team's conversations on your servers.",tr:"Kurumsal Slack alternatifi, kendi sunucunuzda, açık kaynak.",ru:"Корпоративная альтернатива Slack, самохостируемая."},features:{en:["Self-hosted","Slack-like UI","File sharing","Integration ecosystem"],tr:["Kendi sunucunda","Slack benzeri arayüz","Dosya paylaşımı","Entegrasyon ekosistemi"],ru:["Самохостинг","Интерфейс как Slack","Файлы","Интеграции"]}}
+  ],
+  tools: [
+    {name:"Obtainium",icon:"⬇️",repo:"ImranR98/Obtainium",dl:"https://obtainium.imranr.dev/",desc:{en:"Get app updates directly from GitHub, F-Droid, or any source — bypassing the Play Store entirely. Your apps, your update schedule.",tr:"Uygulamaları doğrudan GitHub, F-Droid veya herhangi bir kaynaktan alın — Play Store'u tamamen atlayarak.",ru:"Получай обновления прямо с GitHub, F-Droid или любого источника, минуя Play Store."},features:{en:["Direct from source","Custom update sources","Bulk updates","GitHub/GitLab support"],tr:["Doğrudan kaynaktan","Özel güncelleme kaynakları","Toplu güncellemeler","GitHub/GitLab desteği"],ru:["Прямо из источника","Кастомные источники","Массовые обновления","GitHub/GitLab"]}},
+    {name:"F-Droid",icon:"📦",repo:"f-droid/fdroidclient",dl:"https://f-droid.org/",desc:{en:"The free software app store for Android. Every app is verified open source. No payment info, no tracking, no profit motive.",tr:"Android için özgür yazılım uygulama mağazası. Her uygulama doğrulanmış açık kaynaktır.",ru:"Магазин свободного ПО для Android. Каждое приложение верифицировано."},features:{en:["Only open source apps","Anti-feature labels","No account needed","Reproducible builds"],tr:["Yalnızca açık kaynak uygulamalar","Özellik karşıtı etiketler","Hesap gerekmez","Tekrarlanabilir derlemeler"],ru:["Только open source","Антифичи-метки","Без аккаунта","Воспроизводимые сборки"]}},
+    {name:"Keepass2Android",icon:"🔑",repo:"PhilippC/keepass2android",dl:"https://github.com/PhilippC/keepass2android",desc:{en:"Full-featured KeePass client for Android with QuickUnlock, fingerprint support, and cloud sync. Your passwords, never trapped in a proprietary vault.",tr:"QuickUnlock, parmak izi desteği ve bulut senkronizasyonu ile Android için tam özellikli KeePass istemcisi.",ru:"Полнофункциональный KeePass клиент с QuickUnlock и облачной синхронизацией."},features:{en:["KeePass compatible","Fingerprint unlock","Cloud sync (own)","QuickUnlock"],tr:["KeePass uyumlu","Parmak izi kilidi","Bulut senkronizasyonu (kendi)","QuickUnlock"],ru:["KeePass совместимость","Отпечаток пальца","Своя облачная синхронизация","QuickUnlock"]}},
+    {name:"Lissen",icon:"🎧",repo:"twistios/lissen-android",dl:"https://github.com/twistios/lissen-android",desc:{en:"Audiobook player for Audiobookshelf with a gorgeous interface. Self-host your entire audiobook library and stream it privately.",tr:"Güzel arayüzlü Audiobookshelf için sesli kitap oynatıcı. Tüm sesli kitap kütüphanenizi kendi sunucunuzda barındırın ve gizlice yayınlayın.",ru:"Плеер аудиокниг для Audiobookshelf с красивым интерфейсом."},features:{en:["Audiobookshelf integration","Beautiful UI","Offline downloads","Self-hosted"],tr:["Audiobookshelf entegrasyonu","Güzel arayüz","Çevrimdışı indirmeler","Kendi sunucunda"],ru:["Audiobookshelf","Красивый UI","Офлайн","Самохостинг"]}},
+    {name:"Material Files",icon:"📁",repo:"zhanghai/MaterialFiles",dl:"https://github.com/zhanghai/MaterialFiles",desc:{en:"File manager so beautiful it should be illegal. Material You design, root access support, full SFTP/FTP support.",tr:"O kadar güzel bir dosya yöneticisi ki yasal olmamalı. Material You tasarım, root erişim desteği, tam SFTP/FTP desteği.",ru:"Файловый менеджер с дизайном Material You, root-доступом и SFTP."},features:{en:["Material You design","Root file access","SFTP/FTP server","Zip/7z/tar support"],tr:["Material You tasarım","Root dosya erişimi","SFTP/FTP sunucu","Zip/7z/tar desteği"],ru:["Material You","Root-доступ","SFTP/FTP","Zip/7z/tar"]}},
+    {name:"Ghost Commander",icon:"👻",repo:"GhostCommander/GhostCommander",dl:"https://f-droid.org/packages/com.ghostsq.commander/",desc:{en:"Dual-panel file manager for power users. SSH, FTP, SMB network shares all in the classic two-pane layout.",tr:"Güçlü kullanıcılar için çift panelli dosya yöneticisi. Klasik iki bölmeli düzende SSH, FTP, SMB ağ paylaşımları.",ru:"Двухпанельный файловый менеджер. SSH, FTP, SMB."},features:{en:["Dual panel","SSH/SFTP","SMB network shares","Root support"],tr:["Çift panel","SSH/SFTP","SMB ağ paylaşımları","Root desteği"],ru:["Двойная панель","SSH/SFTP","SMB","Root"]}},
+    {name:"Joplin",icon:"📝",repo:"laurent22/joplin",dl:"https://joplinapp.org/",desc:{en:"Markdown notes with end-to-end encrypted sync. Replace Evernote and Notion with something you own.",tr:"Uçtan uca şifreli senkronizasyon ile Markdown notları. Evernote ve Notion'ı sahip olduğunuz bir şeyle değiştirin.",ru:"Markdown-заметки с E2E-шифрованием. Замена Evernote и Notion."},features:{en:["E2E encrypted sync","Markdown support","Web clipper","Multi-platform"],tr:["Uçtan uca şifreli senkronizasyon","Markdown desteği","Web kırpıcı","Çok platformlu"],ru:["E2E синхронизация","Markdown","Web clipper","Кроссплатформенность"]}},
+    {name:"Notesnook",icon:"🗒️",repo:"streetwriters/notesnook",dl:"https://notesnook.com/",desc:{en:"Zero-knowledge encrypted notes. Beautiful editor, sync across devices, Evernote import — and they can't read your notes.",tr:"Sıfır bilgi şifreli notlar. Güzel editör, cihazlar arası senkronizasyon, Evernote içe aktarma.",ru:"Заметки с нулевым знанием. Красивый редактор, синхронизация."},features:{en:["Zero-knowledge","Rich text editor","Cross-platform","Evernote import"],tr:["Sıfır bilgi","Zengin metin editörü","Çapraz platform","Evernote içe aktarma"],ru:["Нулевое знание","Богатый редактор","Кроссплатформа","Импорт Evernote"]}},
+    {name:"Standard Notes",icon:"📋",repo:"standardnotes/app",dl:"https://standardnotes.com/",desc:{en:"100-year app promise. E2E encrypted notes that will outlive any company. Extensions for power users.",tr:"100 yıllık uygulama vaadi. Herhangi bir şirketten uzun ömürlü E2E şifreli notlar.",ru:"Обещание 100 лет. E2E-заметки, которые переживут любую компанию."},features:{en:["100-year commitment","E2E encrypted","Extensions","Markdown"],tr:["100 yıllık taahhüt","Uçtan uca şifreli","Uzantılar","Markdown"],ru:["100 лет","E2E","Расширения","Markdown"]}},
+    {name:"Markor",icon:"✍️",repo:"gsantner/markor",dl:"https://github.com/gsantner/markor",desc:{en:"Markdown editor and to-do list powerhouse. Stores files locally in plain text. Fully offline, zero cloud.",tr:"Markdown editörü ve yapılacaklar listesi. Dosyaları yerel olarak düz metin olarak saklar.",ru:"Редактор Markdown и ToDo. Хранит файлы локально. Полностью офлайн."},features:{en:["Local file storage","Markdown + todo","Zero cloud","GitHub-flavored Markdown"],tr:["Yerel dosya depolama","Markdown + yapılacaklar","Sıfır bulut","GitHub Markdown"],ru:["Локальное хранение","Markdown + ToDo","Без облака","GitHub Markdown"]}},
+    {name:"OpenBoard",icon:"⌨️",repo:"openboard/openboard",dl:"https://github.com/openboard-team/openboard",desc:{en:"Keyboard that does not spy. No internet permission, no word swiping data sent anywhere. Just types.",tr:"Casus yapmayan klavye. İnternet izni yok, hiçbir yere gönderilen kelime kaydırma verisi yok.",ru:"Клавиатура без слежки. Без интернета, без отправки данных."},features:{en:["No internet permission","Swipe typing","Emoji support","Multiple languages"],tr:["İnternet izni yok","Kaydırma yazma","Emoji desteği","Çoklu dil"],ru:["Без интернета","Свайп","Эмодзи","Многоязычность"]}},
+    {name:"AnySoftKeyboard",icon:"⌨",repo:"AnySoftKeyboard/AnySoftKeyboard",dl:"https://anysoftkeyboard.github.io/",desc:{en:"Highly customizable FOSS keyboard. Hundreds of language packs, custom themes, voice input — all without phoning home.",tr:"Yüksek derecede özelleştirilebilir FOSS klavye. Yüzlerce dil paketi, özel temalar, ses girişi.",ru:"Полностью кастомизируемая FOSS-клавиатура. Сотни языков."},features:{en:["200+ language packs","Custom themes","Voice input","Gesture typing"],tr:["200'den fazla dil paketi","Özel temalar","Ses girişi","Hareket yazma"],ru:["200+ языков","Темы","Голосовой ввод","Жестовый ввод"]}},
+    {name:"HeliBoard",icon:"⌨️",repo:"Helium314/HeliBoard",dl:"https://github.com/Helium314/HeliBoard",desc:{en:"Next-gen FOSS keyboard forked from AOSP. Glide typing, multilingual, beautiful and private.",tr:"AOSP'tan çatallanmış yeni nesil FOSS klavye. Kaydırma yazma, çok dilli, güzel ve gizli.",ru:"FOSS-клавиатура нового поколения на основе AOSP."},features:{en:["Glide typing","Multi-language","No telemetry","AOSP-based"],tr:["Kaydırma yazma","Çok dilli","Telemetri yok","AOSP tabanlı"],ru:["Свайп","Мультиязычность","Без телеметрии","AOSP"]}},
+    {name:"Simple Calculator",icon:"🔢",repo:"SimpleMobileTools/Simple-Calculator",dl:"https://www.simplemobiletools.com/",desc:{en:"Calculator that calculates. No ads, no telemetry, no permissions beyond basic arithmetic. Does its job perfectly.",tr:"Hesap yapan hesap makinesi. Reklam yok, telemetri yok, temel aritmetik dışında izin yok.",ru:"Калькулятор, который считает. Без рекламы, без телеметрии."},features:{en:["No ads","No permissions","Offline","Clean UI"],tr:["Reklam yok","İzin yok","Çevrimdışı","Temiz arayüz"],ru:["Без рекламы","Без разрешений","Офлайн","Чистый UI"]}},
+    {name:"Syncthing",icon:"🔄",repo:"syncthing/syncthing-android",dl:"https://syncthing.net/",desc:{en:"Sync files between devices without any cloud. Direct, encrypted, peer-to-peer sync that works on LAN or internet.",tr:"Herhangi bir bulut olmadan cihazlar arasında dosya senkronizasyonu. LAN veya internette çalışan doğrudan, şifreli, eşten eşe senkronizasyon.",ru:"Синхронизация файлов без облака. Прямая зашифрованная P2P синхронизация."},features:{en:["P2P sync","No cloud needed","Encrypted transfers","LAN discovery"],tr:["P2P senkronizasyonu","Bulut gerekmez","Şifreli transferler","LAN keşfi"],ru:["P2P","Без облака","Шифрование","LAN-обнаружение"]}},
+    {name:"Nextcloud",icon:"☁",repo:"nextcloud/android",dl:"https://nextcloud.com/",desc:{en:"Your own Google Drive, Google Photos, Google Calendar — on your servers. The complete cloud replacement.",tr:"Kendi Google Drive, Google Fotoğraflar, Google Takvim — sunucularınızda.",ru:"Ваш собственный Google Drive, Photos, Calendar — на своих серверах."},features:{en:["Self-hosted cloud","Photos, files, calendar","E2E encryption option","App ecosystem"],tr:["Kendi bulutunda","Fotoğraflar, dosyalar, takvim","E2E şifreleme seçeneği","Uygulama ekosistemi"],ru:["Самохостинг","Фото, файлы, календарь","E2E","Экосистема приложений"]}},
+    {name:"Termux",icon:"💻",repo:"termux/termux-app",dl:"https://termux.dev/",desc:{en:"Linux terminal emulator on Android. Install packages, run scripts, SSH servers, Python — all from your pocket.",tr:"Android'de Linux terminal emülatörü. Paket kurun, betik çalıştırın, SSH sunucuları, Python — hepsini cebinizden.",ru:"Linux-эмулятор терминала на Android. Пакеты, скрипты, SSH, Python."},features:{en:["Full Linux environment","Package manager","SSH server","Python/Node/Ruby"],tr:["Tam Linux ortamı","Paket yöneticisi","SSH sunucu","Python/Node/Ruby"],ru:["Полный Linux","Пакетный менеджер","SSH","Python/Node/Ruby"]}},
+    {name:"aShell",icon:"🖥️",repo:"sunilpaulmathew/ashell",dl:"https://f-droid.org/packages/in.sunilpaulmathew.ashell/",desc:{en:"ADB shell interface for Android. Run ADB commands directly from your device without a PC.",tr:"Android için ADB kabuk arayüzü. PC olmadan doğrudan cihazınızdan ADB komutları çalıştırın.",ru:"ADB-интерфейс для Android. Запускай ADB команды без ПК."},features:{en:["No PC needed","ADB commands","Shell scripting","Root optional"],tr:["PC gerekmez","ADB komutları","Shell betik","Root opsiyonel"],ru:["Без ПК","ADB команды","Shell-скрипты","Root необязателен"]}},
+    {name:"OpenTasks",icon:"✅",repo:"dmfs/opentasks",dl:"https://github.com/dmfs/opentasks",desc:{en:"Open task manager with DAVx5 sync support. Sync your to-dos with CalDAV servers. No cloud proprietary lock-in.",tr:"DAVx5 senkronizasyon desteği ile açık görev yöneticisi. Yapılacaklarınızı CalDAV sunucularıyla senkronize edin.",ru:"Менеджер задач с поддержкой DAVx5. Синхронизация через CalDAV."},features:{en:["CalDAV sync","DAVx5 compatible","Open standard","Lists and priorities"],tr:["CalDAV senkronizasyonu","DAVx5 uyumlu","Açık standart","Listeler ve öncelikler"],ru:["CalDAV","DAVx5","Открытый стандарт","Списки и приоритеты"]}},
+    {name:"Tasks.org",icon:"☑️",repo:"tasks/tasks",dl:"https://tasks.org/",desc:{en:"Feature-rich task manager with Google Tasks, Nextcloud, and DAVx5 sync. The most powerful FOSS task app.",tr:"Google Tasks, Nextcloud ve DAVx5 senkronizasyonu ile özellik açısından zengin görev yöneticisi.",ru:"Богатый менеджер задач с синхронизацией Google Tasks, Nextcloud, DAVx5."},features:{en:["Multiple sync providers","Subtasks","Tags & filters","CalDAV support"],tr:["Çoklu senkronizasyon sağlayıcıları","Alt görevler","Etiketler ve filtreler","CalDAV desteği"],ru:["Несколько провайдеров","Подзадачи","Теги","CalDAV"]}},
+    {name:"Lawnchair",icon:"🪑",repo:"LawnchairLauncher/lawnchair",dl:"https://lawnchair.app/",desc:{en:"Pixel Launcher with everything you actually want: icon packs, gesture navigation, more grid options — zero bloat.",tr:"Gerçekten istediğiniz her şeyle Pixel Başlatıcı: simge paketleri, hareket navigasyonu, daha fazla ızgara seçeneği.",ru:"Pixel Launcher со всем, что ты хочешь: паки иконок, жесты, настройки сетки."},features:{en:["Icon pack support","Gesture nav","Custom grid","Material You"],tr:["Simge paketi desteği","Hareket navigasyonu","Özel ızgara","Material You"],ru:["Паки иконок","Жесты","Кастомная сетка","Material You"]}},
+    {name:"KISS Launcher",icon:"💋",repo:"Neamar/KISS",dl:"https://kisslauncher.com/",desc:{en:"The fastest Android launcher. Just search, no widgets, no icons grid, nothing between you and your apps.",tr:"En hızlı Android başlatıcı. Sadece arama, widget yok, simge ızgarası yok, siz ve uygulamalarınız arasında hiçbir şey yok.",ru:"Быстрейший лаунчер Android. Только поиск, без виджетов."},features:{en:["Lightning fast search","Minimal UI","Privacy mode","Completely offline"],tr:["Yıldırım hızında arama","Minimal arayüz","Gizlilik modu","Tamamen çevrimdışı"],ru:["Мгновенный поиск","Минимализм","Режим приватности","Офлайн"]}},
+    {name:"DAVx5",icon:"📅",repo:"bitfireAT/davx5-ose",dl:"https://www.davx5.com/",desc:{en:"CalDAV/CardDAV sync adapter. Sync contacts and calendars with Nextcloud, Fastmail, or any standard server.",tr:"CalDAV/CardDAV senkronizasyon adaptörü. Kişileri ve takvimleri Nextcloud, Fastmail veya herhangi bir standart sunucuyla senkronize edin.",ru:"CalDAV/CardDAV синхронизация. Контакты и календари с Nextcloud или любым сервером."},features:{en:["CalDAV sync","CardDAV sync","Nextcloud compatible","Open standard"],tr:["CalDAV senkronizasyonu","CardDAV senkronizasyonu","Nextcloud uyumlu","Açık standart"],ru:["CalDAV","CardDAV","Nextcloud","Открытый стандарт"]}},
+    {name:"Etar Calendar",icon:"📆",repo:"Etar-Group/Etar-Calendar",dl:"https://github.com/Etar-Group/Etar-Calendar",desc:{en:"Material design calendar app that works with any CalDAV server. Replaces Google Calendar with something that respects you.",tr:"Herhangi bir CalDAV sunucusuyla çalışan Material tasarım takvim uygulaması.",ru:"Календарь Material Design для любого CalDAV сервера."},features:{en:["CalDAV support","Material design","Multiple accounts","Widget support"],tr:["CalDAV desteği","Material tasarım","Çoklu hesaplar","Widget desteği"],ru:["CalDAV","Material","Несколько аккаунтов","Виджеты"]}},
+    {name:"Pdf Viewer Plus",icon:"📄",repo:"JavaCafe01/PdfViewer",dl:"https://github.com/JavaCafe01/PdfViewer",desc:{en:"Minimal PDF viewer with no internet permission. Just opens and renders PDFs, nothing else, nothing sinister.",tr:"İnternet izni olmayan minimal PDF görüntüleyici.",ru:"Минимальный просмотрщик PDF без интернета."},features:{en:["No internet","Fast rendering","Bookmarks","Night mode"],tr:["İnternet yok","Hızlı render","Yer imleri","Gece modu"],ru:["Без интернета","Быстрый рендер","Закладки","Ночной режим"]}},
+    {name:"Gadgetbridge",icon:"⌚",repo:"Freeyourgadget/Gadgetbridge",dl:"https://gadgetbridge.org/",desc:{en:"Control your smartwatch without the manufacturer's cloud. Fitbit, Mi Band, Huawei Watch — all without their apps.",tr:"Üreticinin bulutu olmadan akıllı saatinizi kontrol edin. Fitbit, Mi Band, Huawei Watch — hepsi onların uygulamaları olmadan.",ru:"Управляй смарт-часами без облака производителя."},features:{en:["80+ device support","No manufacturer cloud","Health data stays local","Open source"],tr:["80'den fazla cihaz desteği","Üretici bulutu yok","Sağlık verileri yerelde","Açık kaynak"],ru:["80+ устройств","Без облака","Данные здоровья локально","Открытый код"]}}
+  ],
+  phone: [
+    {name:"Fossify Phone",icon:"📞",repo:"FossifyOrg/Phone",dl:"https://github.com/FossifyOrg/Phone",desc:{en:"Open source dialer and call manager. The stock dialer sends data. This one makes calls. That's it.",tr:"Açık kaynak çevirici ve arama yöneticisi. Stok çevirici veri gönderir. Bu sadece arama yapar.",ru:"Открытый исходный номеронабиратель. Стандартный отправляет данные. Этот просто звонит."},features:{en:["No telemetry","Call recording","Blocklist","Material design"],tr:["Telemetri yok","Çağrı kaydı","Engelleme listesi","Material tasarım"],ru:["Без телеметрии","Запись звонков","Чёрный список","Material"]}},
+    {name:"Fossify Contacts",icon:"👤",repo:"FossifyOrg/Contacts",dl:"https://github.com/FossifyOrg/Contacts",desc:{en:"Contact manager that doesn't upload your social graph to a cloud server. Your relationships, your device.",tr:"Sosyal grafiğinizi bulut sunucusuna yüklemeyen kişi yöneticisi.",ru:"Менеджер контактов без загрузки в облако."},features:{en:["Local storage","vCard import/export","No cloud sync","Duplicate detection"],tr:["Yerel depolama","vCard içe/dışa aktarma","Bulut senkronizasyonu yok","Kopya tespiti"],ru:["Локальное хранение","vCard","Без облака","Дубликаты"]}},
+    {name:"Fossify Camera",icon:"📷",repo:"FossifyOrg/Camera",dl:"https://github.com/FossifyOrg/Camera",desc:{en:"Camera without GPS metadata sneaking into your photos or uploading to cloud. Shoot, store, stay private.",tr:"Fotoğraflarınıza gizlice GPS meta verisi eklemeyen veya buluta yüklemeyen kamera.",ru:"Камера без GPS метаданных и загрузки в облако."},features:{en:["No GPS tagging (optional)","No cloud upload","QR scanner","Volume shutter"],tr:["GPS etiketleme yok (isteğe bağlı)","Buluta yükleme yok","QR tarayıcı","Ses düğmesi deklanşörü"],ru:["Без GPS (опционально)","Без загрузки","QR сканер","Кнопка громкости"]}},
+    {name:"Fossify Gallery",icon:"🖼️",repo:"FossifyOrg/Gallery",dl:"https://github.com/FossifyOrg/Gallery",desc:{en:"Photo gallery that keeps photos on your device, not Google's servers. Hidden folders, password protection, everything.",tr:"Fotoğrafları Google'ın sunucularında değil cihazınızda tutan fotoğraf galerisi.",ru:"Галерея, которая хранит фото на устройстве, не на серверах Google."},features:{en:["Local storage","Hidden folder protection","RAW support","No cloud backup forced"],tr:["Yerel depolama","Gizli klasör koruması","RAW desteği","Zorunlu bulut yedekleme yok"],ru:["Локальное хранение","Скрытые папки","RAW","Без принудительного бэкапа"]}},
+    {name:"Fossify SMS Messenger",icon:"💬",repo:"FossifyOrg/SMS-Messenger",dl:"https://github.com/FossifyOrg/SMS-Messenger",desc:{en:"SMS/MMS without RCS cloud logging. Clean design, scheduled SMS, blacklist — no analytics in sight.",tr:"RCS bulut kaydı olmadan SMS/MMS. Temiz tasarım, zamanlanmış SMS, kara liste.",ru:"SMS/MMS без RCS-логирования в облаке."},features:{en:["No RCS cloud","Scheduled SMS","PIN lock","Backup & restore"],tr:["RCS bulutu yok","Zamanlanmış SMS","PIN kilidi","Yedekleme & geri yükleme"],ru:["Без RCS-облака","Плановые SMS","PIN","Бэкап"]}},
+    {name:"Fossify File Manager",icon:"📂",repo:"FossifyOrg/File-Manager",dl:"https://github.com/FossifyOrg/File-Manager",desc:{en:"Simple, clean file management. No network access requested, no analytics, no permission creep. Files, managed.",tr:"Basit, temiz dosya yönetimi. Ağ erişimi talep edilmez, analiz yok, izin sürünmesi yok.",ru:"Простое и чистое управление файлами. Без сетевого доступа."},features:{en:["No internet needed","Clean interface","Root support optional","ZIP support"],tr:["İnternet gerekmez","Temiz arayüz","Root desteği opsiyonel","ZIP desteği"],ru:["Без интернета","Чистый интерфейс","Root опционально","ZIP"]}},
+    {name:"Fossify Calendar",icon:"📅",repo:"FossifyOrg/Calendar",dl:"https://github.com/FossifyOrg/Calendar",desc:{en:"Calendar that syncs with your servers, not Google's. CalDAV compatible, offline capable, fully private.",tr:"Google'ın sunucularıyla değil, kendi sunucularınızla senkronize olan takvim.",ru:"Календарь, который синхронизируется с вашими серверами, не Google."},features:{en:["CalDAV sync","Birthday reminders","Widget","Recurring events"],tr:["CalDAV senkronizasyonu","Doğum günü hatırlatıcıları","Widget","Tekrarlayan etkinlikler"],ru:["CalDAV","Дни рождения","Виджет","Повторяющиеся события"]}},
+    {name:"Fossify Notes",icon:"📝",repo:"FossifyOrg/Notes",dl:"https://github.com/FossifyOrg/Notes",desc:{en:"Plain text notes, stored locally. Nothing fancy, nothing invasive. Exactly what a notes app should be.",tr:"Yerel olarak saklanan düz metin notları. Süslü bir şey yok, işgalci bir şey yok.",ru:"Простые текстовые заметки, хранящиеся локально."},features:{en:["Local storage","Widget support","Backup support","No ads"],tr:["Yerel depolama","Widget desteği","Yedekleme desteği","Reklam yok"],ru:["Локальное хранение","Виджет","Бэкап","Без рекламы"]}},
+    {name:"Fossify Music Player",icon:"🎵",repo:"FossifyOrg/Music-Player",dl:"https://github.com/FossifyOrg/Music-Player",desc:{en:"Plays music from your local storage. No streaming, no scrobbling to third parties, no 'smart' recommendations harvesting your taste.",tr:"Yerel depolamadan müzik çalar. Akış yok, üçüncü taraflara scrobbling yok, zevkinizi toplayan 'akıllı' öneriler yok.",ru:"Воспроизведение музыки с локального хранилища. Без стриминга."},features:{en:["Local music only","Equalizer","Sleep timer","Widget support"],tr:["Yalnızca yerel müzik","Ekolayzer","Uyku zamanlayıcısı","Widget desteği"],ru:["Только локальная музыка","Эквалайзер","Таймер сна","Виджет"]}},
+    {name:"Fossify Clock",icon:"⏰",repo:"FossifyOrg/Clock",dl:"https://github.com/FossifyOrg/Clock",desc:{en:"Alarm clock and timer that works offline, doesn't phone home, and doesn't need your Google account. Revolutionary concept.",tr:"Çevrimdışı çalışan, eve telefon etmeyen ve Google hesabınıza ihtiyaç duymayan alarm saati ve zamanlayıcı.",ru:"Будильник и таймер, работающий офлайн. Без Google аккаунта."},features:{en:["No internet permission","Alarm, timer, stopwatch","Widget","No ads"],tr:["İnternet izni yok","Alarm, zamanlayıcı, kronometre","Widget","Reklam yok"],ru:["Без интернета","Будильник, таймер, секундомер","Виджет","Без рекламы"]}},
+    {name:"Fossify Draw",icon:"✏️",repo:"FossifyOrg/Draw",dl:"https://github.com/FossifyOrg/Draw",desc:{en:"Simple drawing app that works without internet. Sketch, annotate, save — privately.",tr:"İnternetsiz çalışan basit çizim uygulaması. Çizim yapın, açıklama ekleyin, kaydedin — gizlice.",ru:"Простое приложение для рисования без интернета."},features:{en:["Offline","SVG export","Layer support","No telemetry"],tr:["Çevrimdışı","SVG dışa aktarma","Katman desteği","Telemetri yok"],ru:["Офлайн","SVG","Слои","Без телеметрии"]}},
+    {name:"Fossify App Launcher",icon:"🚀",repo:"FossifyOrg/App-Launcher",dl:"https://github.com/FossifyOrg/App-Launcher",desc:{en:"Custom home screen app launcher. Organize your phone your way without Google's home screen collecting your interaction data.",tr:"Özel ana ekran uygulama başlatıcısı. Telefonunuzu Google'ın ana ekranı etkileşim verilerinizi toplamadan kendi yolunuzda organize edin.",ru:"Кастомный лаунчер без сбора данных Google."},features:{en:["Custom grid","Folder support","No internet","Simple & fast"],tr:["Özel ızgara","Klasör desteği","İnternet yok","Basit & hızlı"],ru:["Кастомная сетка","Папки","Без интернета","Просто и быстро"]}},
+    {name:"Simple Keyboard",icon:"⌨",repo:"rkkr/simple-keyboard",dl:"https://github.com/rkkr/simple-keyboard",desc:{en:"Keyboard with exactly zero internet access. Types letters. Doesn't sell them.",tr:"Tam olarak sıfır internet erişimli klavye. Harf yazar. Satmaz.",ru:"Клавиатура с нулевым доступом в интернет."},features:{en:["No internet","Minimal permissions","Fast and light","Custom themes"],tr:["İnternet yok","Minimal izinler","Hızlı ve hafif","Özel temalar"],ru:["Без интернета","Минимальные разрешения","Быстрая","Темы"]}},
+    {name:"GrapheneOS",icon:"🟢",repo:"GrapheneOS/platform_frameworks_base",dl:"https://grapheneos.org/",desc:{en:"The most secure Android-compatible OS. Hardened kernel, sandboxed Google Play (optional), enhanced permissions. For Pixel phones.",tr:"En güvenli Android uyumlu işletim sistemi. Güçlendirilmiş çekirdek, sandbox Google Play (isteğe bağlı), gelişmiş izinler.",ru:"Наиболее безопасная Android-совместимая ОС. Для Pixel."},features:{en:["Hardened security","Sandboxed Google Play","Enhanced permissions","Exploit mitigations"],tr:["Güçlendirilmiş güvenlik","Sandboxlı Google Play","Gelişmiş izinler","Exploit azaltma"],ru:["Усиленная безопасность","Sandboxed Google Play","Улучшенные разрешения","Защита"]}},
+    {name:"CalyxOS",icon:"🌸",repo:"CalyxOS",dl:"https://calyxos.org/",desc:{en:"Privacy-focused Android for Pixel and Fairphone. Includes microG for app compatibility with Google services, without being Google.",tr:"Pixel ve Fairphone için gizlilik odaklı Android. Google olmadan Google servisleriyle uygulama uyumluluğu için microG içerir.",ru:"Android с акцентом на приватность. Включает microG для совместимости."},features:{en:["MicroG integration","F-Droid pre-installed","Monthly security updates","Datura firewall"],tr:["MicroG entegrasyonu","F-Droid ön kurulum","Aylık güvenlik güncellemeleri","Datura güvenlik duvarı"],ru:["MicroG","F-Droid предустановлен","Ежемесячные обновления","Datura firewall"]}},
+    {name:"DivestOS",icon:"🔒",repo:"Divested-Mobile/DivestOS-Build",dl:"https://divestos.org/",desc:{en:"LineageOS fork with massive privacy and security improvements. Supports the widest range of devices of any hardened ROM.",tr:"Büyük gizlilik ve güvenlik geliştirmeleriyle LineageOS çatalı. Herhangi bir güçlendirilmiş ROM'un en geniş cihaz yelpazesini destekler.",ru:"Форк LineageOS с улучшениями безопасности. Самый широкий выбор устройств."},features:{en:["400+ supported devices","Enhanced SELinux","Network permission toggle","Regular updates"],tr:["400'den fazla desteklenen cihaz","Gelişmiş SELinux","Ağ izin değişimi","Düzenli güncellemeler"],ru:["400+ устройств","SELinux","Сетевые разрешения","Обновления"]}},
+    {name:"microG",icon:"🟡",repo:"microg/GmsCore",dl:"https://microg.org/",desc:{en:"Open source reimplementation of Google Play Services. Run apps that need Google without actually needing Google.",tr:"Google Play Hizmetlerinin açık kaynak yeniden uygulaması. Google olmadan Google'a ihtiyaç duyan uygulamaları çalıştırın.",ru:"Открытая реализация Google Play Services."},features:{en:["Google-free Google APIs","Push notifications","Location services","FLOSS implementation"],tr:["Google'sız Google API'leri","Push bildirimleri","Konum servisleri","FLOSS uygulaması"],ru:["API Google без Google","Push-уведомления","Геолокация","FLOSS"]}},
+    {name:"App Manager",icon:"🔧",repo:"MuntashirAkon/AppManager",dl:"https://muntashirakon.github.io/AppManager/",desc:{en:"The most powerful app management tool on Android. Full package info, component blocking, backup, ADB over WiFi.",tr:"Android'deki en güçlü uygulama yönetim aracı. Tam paket bilgisi, bileşen engelleme, yedekleme, WiFi üzerinden ADB.",ru:"Самый мощный менеджер приложений. Блокировка компонентов, ADB через WiFi."},features:{en:["Component blocking","ADB over WiFi","Full package info","Root & non-root"],tr:["Bileşen engelleme","WiFi üzerinden ADB","Tam paket bilgisi","Root & non-root"],ru:["Блокировка компонентов","ADB через WiFi","Инфо пакета","Root и без root"]}},
+    {name:"Shizuku",icon:"🔮",repo:"RikkaApps/Shizuku",dl:"https://shizuku.rikka.app/",desc:{en:"Use Android's ADB permissions via a local server. Grant elevated access to apps without root through WiFi ADB.",tr:"Yerel bir sunucu aracılığıyla Android'in ADB izinlerini kullanın. WiFi ADB aracılığıyla uygulamalara root olmadan yükseltilmiş erişim verin.",ru:"ADB разрешения через локальный сервер. Без root."},features:{en:["No root needed","WiFi ADB setup","App permission expansion","System app access"],tr:["Root gerekmez","WiFi ADB kurulumu","Uygulama izin genişletme","Sistem uygulaması erişimi"],ru:["Без root","WiFi ADB","Расширение разрешений","Системные приложения"]}},
+    {name:"Universal Android Debloater",icon:"🗑️",repo:"0x192/universal-android-debloater",dl:"https://github.com/0x192/universal-android-debloater",desc:{en:"Remove pre-installed bloatware with a GUI. See exactly what each package does before removing. Take back your storage.",tr:"GUI ile önceden yüklenmiş şişirilmiş yazılımı kaldırın. Kaldırmadan önce her paketin tam olarak ne yaptığını görün.",ru:"Удаляй предустановленный bloatware через GUI. Верни своё хранилище."},features:{en:["GUI debloating tool","Package descriptions","Backup before remove","ADB based"],tr:["GUI debloat aracı","Paket açıklamaları","Kaldırmadan önce yedekle","ADB tabanlı"],ru:["GUI инструмент","Описания пакетов","Бэкап","ADB"]}},
+    {name:"Droidify",icon:"📦",repo:"Droid-ify/client",dl:"https://github.com/Droid-ify/client",desc:{en:"Beautiful Material You F-Droid client. Browse, install, and update FOSS apps with a gorgeous modern interface.",tr:"Güzel Material You F-Droid istemcisi. Muhteşem modern arayüzle FOSS uygulamalarına göz atın, kurun ve güncelleyin.",ru:"Красивый Material You клиент F-Droid."},features:{en:["Material You design","Multiple repos","Root install support","Background updates"],tr:["Material You tasarım","Çoklu depolar","Root kurulum desteği","Arka plan güncellemeleri"],ru:["Material You","Несколько репозиториев","Root установка","Фоновые обновления"]}},
+    {name:"AuroraStore",icon:"🟣",repo:"whyorean/AuroraStore",dl:"https://auroraoss.com/",desc:{en:"Google Play Store frontend without a Google account. Anonymous browsing, download any Play Store app, zero account needed.",tr:"Google hesabı olmadan Google Play Store ön yüzü. Anonim gezinme, herhangi bir Play Store uygulamasını indirin.",ru:"Интерфейс Google Play без аккаунта. Анонимный доступ к любому приложению."},features:{en:["Anonymous Play Store access","No Google account","App updates","Root/session install"],tr:["Anonim Play Store erişimi","Google hesabı yok","Uygulama güncellemeleri","Root/session kurulum"],ru:["Анонимный доступ","Без Google","Обновления","Root/session"]}},
+    {name:"Gcam Services Provider",icon:"📸",repo:"lukaspieper/Gcam-Services-Provider",dl:"https://github.com/lukaspieper/Gcam-Services-Provider",desc:{en:"Run Google Camera (GCam) on non-Pixel devices without Google Play Services. Full camera power, zero Google telemetry dependency.",tr:"Google Play Hizmetleri olmadan Pixel olmayan cihazlarda Google Kamera (GCam) çalıştırın.",ru:"Запуск Google Camera без Google Play Services на не-Pixel устройствах."},features:{en:["GCam without Play Services","Astrophotography mode","Night Sight","No Google dependency"],tr:["Play Hizmetleri olmadan GCam","Astrofotoğrafçılık modu","Night Sight","Google bağımlılığı yok"],ru:["GCam без Play Services","Астрофото","Night Sight","Без зависимости"]}},
+    {name:"Open Camera",icon:"📷",repo:"MartinC/OpenCamera",dl:"https://opencamera.org.uk/",desc:{en:"Fully featured open source camera. Manual controls, RAW capture, stabilization, no background uploads, no analytics.",tr:"Tam özellikli açık kaynak kamera. Manuel kontroller, RAW çekim, stabilizasyon, arka plan yüklemesi yok, analiz yok.",ru:"Полнофункциональная камера с открытым кодом. Ручное управление, RAW."},features:{en:["Manual camera controls","RAW support","HDR mode","No telemetry"],tr:["Manuel kamera kontrolleri","RAW desteği","HDR modu","Telemetri yok"],ru:["Ручное управление","RAW","HDR","Без телеметрии"]}}
+  ],
+  maps: [
+    {name:"Organic Maps",icon:"🗺️",repo:"organicmaps/organicmaps",dl:"https://organicmaps.app/",desc:{en:"Offline maps powered by OpenStreetMap. No tracking, no ads, no data harvest. Walks, hikes, drives — all without an internet connection.",tr:"OpenStreetMap tarafından desteklenen çevrimdışı haritalar. Takip yok, reklam yok, veri toplama yok.",ru:"Офлайн карты на базе OpenStreetMap. Без слежки, без рекламы, без сбора данных."},features:{en:["Fully offline","OSM based","Hiking & cycling routes","No tracking ever"],tr:["Tamamen çevrimdışı","OSM tabanlı","Yürüyüş & bisiklet rotaları","Asla takip yok"],ru:["Полностью офлайн","OSM","Пешие и велосипедные маршруты","Без слежки"]}},
+    {name:"OsmAnd",icon:"🧭",repo:"osmandapp/Osmand",dl:"https://osmand.net/",desc:{en:"The Swiss Army knife of maps. Offline navigation, topographic maps, sea charts, hiking overlays — OpenStreetMap powered.",tr:"Haritaların İsviçre çakısı. Çevrimdışı navigasyon, topografik haritalar, deniz grafikleri, yürüyüş katmanları.",ru:"Швейцарский нож карт. Офлайн навигация, топо карты, морские карты."},features:{en:["Topo maps","Sea navigation","Trip recording","Wikipedia POIs"],tr:["Topo haritalar","Deniz navigasyonu","Gezi kaydı","Wikipedia POI'leri"],ru:["Топо карты","Морская навигация","Запись маршрута","POI Wikipedia"]}},
+    {name:"Maps.me",icon:"📍",repo:"mapsme/omim",dl:"https://maps.me/",desc:{en:"OpenStreetMap offline maps optimized for travel. Search and navigate to restaurants, hotels, and POIs without a data connection.",tr:"Seyahat için optimize edilmiş OpenStreetMap çevrimdışı haritaları. Veri bağlantısı olmadan restoran, otel ve POI'lere arama ve navigasyon.",ru:"Офлайн карты OSM, оптимизированные для путешествий."},features:{en:["Offline POIs","Restaurant & hotel search","Transit info","Bookmark sharing"],tr:["Çevrimdışı POI'ler","Restoran & otel arama","Transit bilgisi","Yer imi paylaşımı"],ru:["Офлайн POI","Поиск ресторанов","Транспорт","Закладки"]}},
+    {name:"Transportr",icon:"🚇",repo:"grote/Transportr",dl:"https://transportr.app/",desc:{en:"Public transit navigator using open data. Works in 400+ cities worldwide. No Google Maps, no surveillance, just your bus times.",tr:"Açık veri kullanan toplu taşıma navigatörü. Dünya genelinde 400'den fazla şehirde çalışır.",ru:"Навигатор общественного транспорта на открытых данных. 400+ городов."},features:{en:["400+ cities","Open data","Nearby stations","Trip planner"],tr:["400'den fazla şehir","Açık veri","Yakın istasyonlar","Gezi planlayıcısı"],ru:["400+ городов","Открытые данные","Ближайшие станции","Планировщик"]}},
+    {name:"Öffi",icon:"🚌",repo:"",dl:"https://oeffi.schildbach.de/",desc:{en:"Public transit app focused on Central Europe. Real-time departures, trip planning, disruption alerts — all offline capable.",tr:"Orta Avrupa odaklı toplu taşıma uygulaması. Gerçek zamanlı kalkışlar, gezi planlama, aksaklık uyarıları.",ru:"Приложение общественного транспорта для Центральной Европы."},features:{en:["Real-time departures","Disruption info","Trip planning","Offline capable"],tr:["Gerçek zamanlı kalkışlar","Aksaklık bilgisi","Gezi planlama","Çevrimdışı kapasite"],ru:["Реальное время","Сбои","Планирование","Офлайн"]}},
+    {name:"Breezy Weather",icon:"🌤️",repo:"breezy-weather/breezy-weather",dl:"https://github.com/breezy-weather/breezy-weather",desc:{en:"Open source weather with beautiful animations and multiple provider support. No proprietary APIs, no tracking. Just weather.",tr:"Güzel animasyonlar ve çoklu sağlayıcı desteği ile açık kaynak hava durumu.",ru:"Открытый погодный виджет с красивыми анимациями и несколькими провайдерами."},features:{en:["Multiple weather sources","Beautiful animations","Widget support","No tracking"],tr:["Çoklu hava durumu kaynakları","Güzel animasyonlar","Widget desteği","Takip yok"],ru:["Несколько источников","Красивые анимации","Виджеты","Без слежки"]}},
+    {name:"Geometric Weather",icon:"⛅",repo:"WangDaYeeeeee/GeometricWeather",dl:"https://github.com/WangDaYeeeeee/GeometricWeather",desc:{en:"Visually stunning weather app with geometric animations. Multiple providers, widgets, and locations — fully open source.",tr:"Geometrik animasyonlarla görsel açıdan çarpıcı hava durumu uygulaması.",ru:"Визуально потрясающее погодное приложение с геометрическими анимациями."},features:{en:["Geometric animations","Multiple locations","Custom widgets","Many providers"],tr:["Geometrik animasyonlar","Çoklu konumlar","Özel widget'lar","Çok sayıda sağlayıcı"],ru:["Геометрические анимации","Несколько локаций","Виджеты","Провайдеры"]}},
+    {name:"Vespucci",icon:"✏️",repo:"MarcusWolschon/osmeditor4android",dl:"https://vespucci.io/",desc:{en:"OpenStreetMap editor on Android. See something wrong on the map? Fix it. Contribute to the world's open map.",tr:"Android'de OpenStreetMap editörü. Haritada yanlış bir şey mi gördünüz? Düzeltin.",ru:"Редактор OpenStreetMap на Android. Видишь ошибку — исправь."},features:{en:["OSM editing","Offline presets","GPS track recording","Validation tools"],tr:["OSM düzenleme","Çevrimdışı hazır ayarlar","GPS iz kaydı","Doğrulama araçları"],ru:["Редактирование OSM","Офлайн","Запись GPS","Валидация"]}},
+    {name:"StreetComplete",icon:"🏙️",repo:"streetcomplete/StreetComplete",dl:"https://streetcomplete.app/",desc:{en:"Gamified OSM contribution. Answer simple quests about your surroundings to improve OpenStreetMap for everyone.",tr:"Oyunlaştırılmış OSM katkısı. Herkes için OpenStreetMap'i geliştirmek için çevreniz hakkında basit görevleri yanıtlayın.",ru:"Геймифицированный вклад в OSM. Отвечай на вопросы об окружении."},features:{en:["Quest-based editing","No OSM knowledge needed","Offline capable","Gamification"],tr:["Görev tabanlı düzenleme","OSM bilgisi gerekmez","Çevrimdışı kapasite","Gamifikasyon"],ru:["Квесты","Без знания OSM","Офлайн","Геймификация"]}},
+    {name:"Trail Sense",icon:"🧭",repo:"kylecorry31/Trail-Sense",dl:"https://kylecorry31.github.io/Trail-Sense/",desc:{en:"Survival compass, altimeter, weather forecaster, flashlight, and pedometer — all offline. For when you're off the grid.",tr:"Hayatta kalma pusulası, altimetre, hava tahmincisi, el feneri ve pedometre — hepsi çevrimdışı.",ru:"Выживание: компас, альтиметр, прогноз погоды, фонарик — офлайн."},features:{en:["No internet required","Compass & navigation","Altimeter","Backpacking tools"],tr:["İnternet gerekmez","Pusula & navigasyon","Altimetre","Sırt çantası araçları"],ru:["Без интернета","Компас","Альтиметр","Инструменты выживания"]}},
+    {name:"GPSLogger",icon:"📡",repo:"mendhak/gpslogger",dl:"https://gpslogger.app/",desc:{en:"Lightweight GPS logger. Record tracks in GPX, KML, or CSV. Send to your own server, not someone else's.",tr:"Hafif GPS kaydedici. GPX, KML veya CSV formatında izleri kaydedin. Başkasının sunucusuna değil, kendi sunucunuza gönderin.",ru:"Лёгкий GPS-логгер. Записывай треки в GPX, KML, CSV."},features:{en:["Multiple formats","SFTP/FTP/email upload","Background logging","Battery efficient"],tr:["Çoklu formatlar","SFTP/FTP/e-posta yükleme","Arka plan kaydı","Pil verimli"],ru:["GPX/KML/CSV","SFTP/FTP","Фоновая запись","Экономия батареи"]}},
+    {name:"µlogger",icon:"📌",repo:"bfabiszewski/ulogger-android",dl:"https://f-droid.org/packages/net.fabiszewski.ulogger/",desc:{en:"Self-hosted real-time GPS tracking. Share your live location with your own server, not Google or Apple.",tr:"Kendi sunucunuzda gerçek zamanlı GPS takibi. Canlı konumunuzu Google veya Apple değil, kendi sunucunuzla paylaşın.",ru:"Самохостируемый GPS трекинг в реальном времени."},features:{en:["Self-hosted server","Real-time tracking","Share with anyone","GPX export"],tr:["Kendi sunucunda","Gerçek zamanlı takip","Herkesle paylaş","GPX dışa aktarma"],ru:["Самохостинг","Реальное время","Поделиться","GPX"]}},
+    {name:"Locus Map",icon:"🗾",repo:"",dl:"https://www.locusmap.app/",desc:{en:"Advanced outdoor navigation with offline maps, geocaching, route planning, and 3D terrain visualization.",tr:"Çevrimdışı haritalar, jeocaching, rota planlama ve 3D arazi görselleştirmesi ile gelişmiş açık alan navigasyonu.",ru:"Продвинутая навигация с офлайн картами, геокэшингом и 3D рельефом."},features:{en:["3D terrain","Geocaching","Route planner","Offline maps"],tr:["3D arazi","Jeocaching","Rota planlayıcısı","Çevrimdışı haritalar"],ru:["3D рельеф","Геокэшинг","Планировщик","Офлайн"]}},
+    {name:"Freemap Slovakia",icon:"🏔️",repo:"FreemapSlovakia/freemap-android",dl:"https://www.freemap.sk/",desc:{en:"Detailed hiking and cycling maps for Central Europe. OSM-based, offline capable, community maintained.",tr:"Orta Avrupa için detaylı yürüyüş ve bisiklet haritaları.",ru:"Подробные карты для пеших и велосипедных маршрутов Центральной Европы."},features:{en:["Detailed hiking maps","Cycling routes","OSM based","Offline download"],tr:["Detaylı yürüyüş haritaları","Bisiklet rotaları","OSM tabanlı","Çevrimdışı indirme"],ru:["Детальные карты","Велосипед","OSM","Офлайн"]}},
+    {name:"WhereYouGo",icon:"🎯",repo:"cgeo/WhereYouGo",dl:"https://f-droid.org/packages/menion.android.whereyougo/",desc:{en:"Wherigo cartridge player for geocaching adventures. Play location-based interactive games using open data.",tr:"Jeocaching maceraları için Wherigo kartuş oynatıcı.",ru:"Плеер картриджей Wherigo для геокэшинга."},features:{en:["Wherigo support","Offline play","GPS based","Free cartridges"],tr:["Wherigo desteği","Çevrimdışı oyun","GPS tabanlı","Ücretsiz kartuşlar"],ru:["Wherigo","Офлайн","GPS","Бесплатные"]}},
+    {name:"PocketMaps",icon:"🗺",repo:"junjunguo/PocketMaps",dl:"https://github.com/junjunguo/PocketMaps",desc:{en:"Lightweight offline routing app based on GraphHopper and OSM. Navigate without Google Maps or an internet connection.",tr:"GraphHopper ve OSM tabanlı hafif çevrimdışı rota uygulaması.",ru:"Лёгкое офлайн навигационное приложение на GraphHopper + OSM."},features:{en:["GraphHopper routing","Offline maps","Car, bike, foot","Lightweight"],tr:["GraphHopper yönlendirme","Çevrimdışı haritalar","Araba, bisiklet, yaya","Hafif"],ru:["GraphHopper","Офлайн","Авто/вело/пешком","Лёгкое"]}}
+  ]
+};
+
+let lang = 'en';
+let currentPage = 'home';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  renderNav();
+  renderPage(currentPage);
+  document.getElementById('footerSlogan').textContent = T[lang].footerSlogan;
+}
+
+function toggleMobileMenu() {
+  const m = document.getElementById('mobileMenu');
+  const o = document.getElementById('overlay');
+  m.classList.toggle('open');
+  o.classList.toggle('open');
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function navigate(page) {
+  currentPage = page;
+  window.location.hash = page;
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.page === page);
+  });
+  renderPage(page);
+  closeMobileMenu();
+  window.scrollTo(0,0);
+}
+
+function renderNav() {
+  const navLinks = document.getElementById('navLinks');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const navHTML = CATS.map(c => `<button class="nav-btn${currentPage===c.id?' active':''}" data-page="${c.id}" onclick="navigate('${c.id}')">${T[lang][c.id]||c.id}</button>`).join('');
+  navLinks.innerHTML = navHTML;
+  mobileMenu.innerHTML = navHTML;
+}
+
+function renderPage(page) {
+  const main = document.getElementById('main');
+  if (page === 'home') {
+    main.innerHTML = renderHome();
+  } else {
+    const catKey = page+'Apps';
+    main.innerHTML = renderCategory(page, catKey);
+  }
+}
+
+function renderHome() {
+  const t = T[lang];
+  const tagsHTML = t.heroTags.map(tag => {
+    const isBad = tag.includes('📡')||tag.includes('📸')||tag.includes('🎙')||tag.includes('🔑')||tag.includes('💰');
+    return `<span class="hero-tag ${isBad?'bad':'good'}">${tag}</span>`;
+  }).join('');
+  const threatHTML = t.threatCards.map(c => `
+    <div class="threat-card ${c.type}">
+      <h3>${c.title}</h3>
+      <p>${c.text}</p>
+    </div>
+  `).join('');
+  return `
+    <div class="page active">
+      <div class="hero">
+        <div class="hero-eyebrow">${t.heroEyebrow}</div>
+        <h1 class="hero-title">${t.heroTitle[0]}<br><em>${t.heroTitleEm}</em></h1>
+        <p class="hero-sub">${t.heroSub}</p>
+        <div class="hero-tags">${tagsHTML}</div>
+        <button class="hero-cta" onclick="navigate('privacy')">${t.heroCta}</button>
+      </div>
+      <div class="threat-section">
+        <div class="threat-grid">${threatHTML}</div>
+      </div>
+      <div class="leave-banner">
+        <div class="leave-card">
+          <h2>${t.leaveTitle}</h2>
+          <p>${t.leaveSub}</p>
+          <a class="leave-link" href="https://leavemyinternet.github.io" target="_blank" rel="noopener">${t.leaveLink}</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCategory(page, catKey) {
+  const t = T[lang];
+  const apps = APPS[page] || [];
+  const stores = STORES[lang];
+  const storeChips = stores.map(s => `<a class="store-chip" href="${s.url}" target="_blank" rel="noopener">⬇ ${s.label}</a>`).join('');
+  const adbNote = page === 'phone' ? `<div style="background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:.8rem;color:var(--accent2);font-family:'JetBrains Mono',monospace;line-height:1.6">${t.adbNote}</div>` : '';
+  const cardsHTML = apps.map((app, i) => {
+    const di = app.desc[lang] || app.desc.en;
+    const fi = (app.features[lang] || app.features.en);
+    const featHTML = fi.map(f => `<div class="app-feat">${f}</div>`).join('');
+    const iconHTML = `<div class="app-icon">${app.icon}</div>`;
+    return `
+      <div class="app-card stagger-${Math.min(i+1,50)}">
+        <div class="app-top">
+          ${iconHTML}
+          <div>
+            <div class="app-name">${app.name}</div>
+            ${app.repo ? `<div class="app-repo">${app.repo}</div>` : ''}
+          </div>
+        </div>
+        <div class="app-desc">${di}</div>
+        <div class="app-features">${featHTML}</div>
+        ${app.dl ? `<a class="app-dl" href="${app.dl}" target="_blank" rel="noopener">${t.dlBtn}</a>` : ''}
+      </div>
+    `;
+  }).join('');
+  return `
+    <div class="page active">
+      <div class="category-page">
+        <div class="cat-header">
+          <div class="cat-title">${t[page]}</div>
+          <div class="cat-subtitle">${t.catDescs[page]}</div>
+          <div class="store-label">${t.storeLabel}</div>
+          <div class="store-row">${storeChips}</div>
+        </div>
+        ${adbNote}
+        <div class="apps-grid">${cardsHTML}</div>
+      </div>
+    </div>
+  `;
+}
+
+function init() {
+  renderNav();
+  document.getElementById('footerSlogan').textContent = T[lang].footerSlogan;
+  const hash = window.location.hash.replace('#','');
+  const validPages = CATS.map(c=>c.id);
+  const startPage = validPages.includes(hash) ? hash : 'home';
+  navigate(startPage);
+}
+
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.replace('#','');
+  const validPages = CATS.map(c=>c.id);
+  if (validPages.includes(hash) && hash !== currentPage) {
+    navigate(hash);
+  }
+});
+
+init();
+</script>
+</body>
+</html>
