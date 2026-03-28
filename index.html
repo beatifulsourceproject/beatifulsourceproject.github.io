@@ -460,7 +460,7 @@ function closeMobileMenu() {
 
 function navigate(page) {
   currentPage = page;
-  window.location.hash = page;
+  if (page !== 'home') window.location.hash = page;
   document.querySelectorAll('.nav-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.page === page);
   });
